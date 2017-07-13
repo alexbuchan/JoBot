@@ -1,38 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="stylesheets/style.css">
-  <title>JoBot Home</title>
-</head>
+<form action="/login" method="POST" id="form">
+  <h2>JoBot Login</h2>
 
-<body>
-  <form action="/login" method="POST" id="form">
-    <h2>JoBot Login</h2>
+  <label for="username">Username</label>
+  <input type="text" name="username" placeholder="JoBot" required>
 
-    <label for="username">Username</label>
-    <input type="text" name="username" placeholder="JoBot" required>
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="findmeajob" required>
+  
+  <% if (typeof errorMessage !== "undefined") { %>
+    <div class="error-message"><%= message %></div>
+  <% } %>
 
-    <label for="password">Password</label>
-    <input type="password" name="password" placeholder="findmeajob" required>
-    
-    <% if (typeof errorMessage !== "undefined") { %>
-      <div class="error-message"><%= message %></div>
-    <% } %>
+  <button>Sign in</button>
 
-    <button>Sign in</button>
-
-    <p class="account-message">
-      Don't have an account? <a href="/signup">Sign up</a>
-    </p>
-  </form>
-  <div>
-    <a href="/auth/facebook">Login With Facebook</a>
-  </div>
-  <div>
-    <a href="/auth/google">Login with Google+</a>
-  </div>
-</body>
-</html>
+  <p class="account-message">
+    Don't have an account? <a href="/signup">Sign up</a>
+  </p>
+</form>
+<div>
+  <a href="/auth/facebook">Login With Facebook</a>
+</div>
+<div>
+  <a href="/auth/google">Login with Google+</a>
+</div>
