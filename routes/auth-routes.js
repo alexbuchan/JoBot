@@ -5,11 +5,14 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users');
 const passport = require("passport");
 const ensureLogin = require("connect-ensure-login");
+const flash = require('connect-flash');
 
 const bcryptSalt = 10;
 
+
+//SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ##########
 router.get('/signup', (req, res, next) => {
-  res.render('auth/signup');
+  res.render('signup');
 });
 
 router.post('/signup', (req, res, next) => {
@@ -17,16 +20,15 @@ router.post('/signup', (req, res, next) => {
   const password = req.body.password;
 
   if (username === "" || password === "") {
-    res.render("auth/signup", {
+    res.render("signup", {
       errorMessage: "Indicate a username and a password to sign up"
     });
     return;
   }
 
   User.findOne({ username: username }, 'username', (err, user) =>{
-
     if (user !== null) {
-      res.render("auth/signup", {
+      res.render("signup", {
         errorMessage: "The username already exists"
       });
       return;
@@ -37,31 +39,30 @@ router.post('/signup', (req, res, next) => {
     const newUser = new User({
       username: username,
       password: hashPass,
-    })
+    });
 
     newUser.save((err) => {
-      if (err) { return next(err) }
-      res.redirect('/');
-    })
-  })
+      if (err) { return next(err); }
+      res.redirect('auth/userProfile');
+    });
+  });
 });
 
-router.get('/login', (req, res, next) => {
-  console.log('route /login get');
-  res.render('auth/login',{ "message": req.flash("error") });
-})
 
-router.post("/login", passport.authenticate("local", {
-  successRedirect: "/secret",
-  failureRedirect: "/login",
-  failureFlash: true, //disable/enable flash messaging but need flash package
-  passReqToCallback: true
-}));
+//SIGNUP ########## SIGNUP ##########SIGNUP ########## SIGNUP ##########SIGNUP ##########SIGNUP ##########
+
+
+router.get('/userProfile', (req, res, next) => {
+  res.render('userProfile');
+});
+
+
+
 
 router.get('/logout', (req, res, next) => {
     req.logout();
     res.redirect('/login');
-})
+});
 
 router.get("/auth/facebook", passport.authenticate("facebook"));
 router.get("/auth/facebook/callback", passport.authenticate("facebook", {
