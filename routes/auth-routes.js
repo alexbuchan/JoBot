@@ -44,22 +44,31 @@ router.post('/signup', (req, res, next) => {
     newUser.save((err) => {
       if (err) { return next(err); }
       console.log("new user saved!");
-      res.redirect('/userProfile');
+      res.redirect('/');
     });
   });
 });
 
-
+ 
 //USERPROFILE ########## USERPROFILE USERPROFILE ########## USERPROFILE ########## USERPROFILE ##########
 
 router.get('/userProfile', ensureAuthenticated, (req, res, next) => {
   res.render('auth/userProfile');
 });
 
+router.post("/", passport.authenticate("local", {
+  successRedirect: "auth/userProfile",
+  failureRedirect: "/",
+  failureFlash: true, //disable/enable flash messaging but need flash package
+  passReqToCallback: true
+}));
+
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
+    console.log("USER AUTHENTICATED");
     return next(); 
   } else {
+    console.log("USER NOT AUTHENTICATED :(");
     res.redirect('/')
   }
 }

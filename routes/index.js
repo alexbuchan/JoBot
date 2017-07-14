@@ -21,34 +21,3 @@ router.post("/", passport.authenticate("local", {
 
 module.exports = router;
 
-
-// const username = req.body.username;
-// const password = req.body.password;
-//
-// if (username === "" || password === "") {
-//   res.render("auth/signup", {
-//     errorMessage: "Indicate a username and a password to sign up"
-//   });
-//   return;
-// }
-//
-// User.findOne({ username: username }, 'username', (err, user) =>{
-//   if (user !== null) {
-//     res.render("auth/signup", {
-//       errorMessage: "The username already exists"
-//     });
-//     return;
-//   }
-//   const salt = bcrypt.genSaltSync(bcryptSalt);
-//   const hashPass = bcrypt.hashSync(password, salt);
-//
-//   const newUser = new User({
-//     username: username,
-//     password: hashPass,
-//   });
-//
-//   newUser.save((err) => {
-//     if (err) { return next(err); }
-//     res.redirect('userProfile');
-//   });
-// });
