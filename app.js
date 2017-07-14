@@ -10,6 +10,7 @@ const expressLayouts = require('express-ejs-layouts');
 const bcrypt        = require("bcrypt");
 const passport      = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const ensureLogin = require("connect-ensure-login");
 const MongoStore = require("connect-mongo")(session);
 const FbStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
@@ -19,6 +20,7 @@ mongoose.connect('mongodb://localhost:27017/jobot');
 
 //INIITIALIZE ROUTES
 const index = require('./routes/index');
+const authRoutes = require('./routes/auth-routes');
 const User = require('./models/users');
 
 const app = express();
@@ -133,8 +135,10 @@ app.use(cookieParser());
 app.use(expressLayouts);
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "bower_components")));
 
 app.use('/', index);
+app.use('/', authRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

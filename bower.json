@@ -1,0 +1,20 @@
+{
+  "name": "jobot",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Brad Le <brad.le444@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/alexbuchan/JoBot",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
