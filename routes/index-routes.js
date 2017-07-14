@@ -8,3 +8,16 @@ const flash = require('connect-flash');
 
 
 /* GET home page. */
+router.get('/', (req, res, next) => {
+  res.render('index',{ "message": req.flash("error") });
+});
+
+router.post("/", passport.authenticate("local", {
+  successRedirect: "/auth/userProfile",
+  failureRedirect: "/",
+  failureFlash: true, //disable/enable flash messaging but need flash package
+  passReqToCallback: true
+}));
+
+module.exports = router;
+

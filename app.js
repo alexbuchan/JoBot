@@ -21,7 +21,7 @@ const flash = require('connect-flash');
 mongoose.connect('mongodb://localhost:27017/jobot');
 
 //INIITIALIZE ROUTES
-const index = require('./routes/index');
+const index = require('./routes/index-routes');
 const authRoutes = require('./routes/auth-routes');
 const User = require('./models/users');
 
