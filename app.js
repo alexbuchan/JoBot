@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -14,6 +15,7 @@ const ensureLogin = require("connect-ensure-login");
 const MongoStore = require("connect-mongo")(session);
 const FbStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const flash = require('connect-flash');
 
 //CONNECT MONGODB
 mongoose.connect('mongodb://localhost:27017/jobot');
@@ -36,6 +38,8 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());

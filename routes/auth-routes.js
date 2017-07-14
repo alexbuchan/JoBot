@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -14,14 +15,14 @@ router.get('/signup', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-  
+
   if (username === "" || password === "") {
     res.render("auth/signup", {
       errorMessage: "Indicate a username and a password to sign up"
     });
     return;
   }
-  
+
   User.findOne({ username: username }, 'username', (err, user) =>{
 
     if (user !== null) {
