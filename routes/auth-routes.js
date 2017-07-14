@@ -42,22 +42,31 @@ router.post('/signup', (req, res, next) => {
     });
 
     newUser.save((err) => {
-      if (err) { return next(err); }
-      console.log("new user saved!");
-      res.redirect('/');
+      if (err) {
+        req.flash('error', 'The username already exists!');
+        res.render('signup', { "message": req.flash('error') });
+      }
+      else {
+        console.log("new user saved!");
+        passport.authenticate('local')(req, res, function(){
+          res.redirect('/userProfile');
+        });
+      }
     });
   });
 });
 
- 
+
 //USERPROFILE ########## USERPROFILE USERPROFILE ########## USERPROFILE ########## USERPROFILE ##########
 
 router.get('/userProfile', ensureAuthenticated, (req, res, next) => {
   res.render('auth/userProfile');
 });
 
+//AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ##########
+
 router.post("/", passport.authenticate("local", {
-  successRedirect: "auth/userProfile",
+  successRedirect: "/userProfile",
   failureRedirect: "/",
   failureFlash: true, //disable/enable flash messaging but need flash package
   passReqToCallback: true
@@ -66,21 +75,21 @@ router.post("/", passport.authenticate("local", {
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     console.log("USER AUTHENTICATED");
-    return next(); 
+    return next();
   } else {
     console.log("USER NOT AUTHENTICATED :(");
-    res.redirect('/')
+    res.redirect('/');
   }
 }
 
 router.get('/logout', (req, res, next) => {
     req.logout();
-    res.redirect('/login');
+    res.redirect('/');
 });
 
 router.get("/auth/facebook", passport.authenticate("facebook"));
 router.get("/auth/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/secret",
+  successRedirect: "/userProfile",
   failureRedirect: "/"
 }));
 
@@ -90,14 +99,9 @@ router.get("/auth/google", passport.authenticate("google", {
 }));
 
 router.get("/auth/google/callback", passport.authenticate("google", {
-  failureRedirect: "/",
-  successRedirect: "/secret"
+  successRedirect: "/userProfile",
+  failureRedirect: "/"
 }));
 
-router.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
-  res.render("private", { user: req.user });
-});
 
 module.exports = router;
-
-
