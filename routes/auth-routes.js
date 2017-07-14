@@ -43,11 +43,10 @@ router.post('/signup', (req, res, next) => {
 
     newUser.save((err) => {
       if (err) {
-        req.flash('error', 'The username already exists!');
-        res.render('signup', { "message": req.flash('error') });
+        req.flash('error', 'THE HECK!');
+        res.render('signup', { "errorMessage": req.flash('error') });
       }
       else {
-        console.log("new user saved!");
         passport.authenticate('local')(req, res, function(){
           res.redirect('/userProfile');
         });
@@ -64,13 +63,6 @@ router.get('/userProfile', ensureAuthenticated, (req, res, next) => {
 });
 
 //AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ##########
-
-router.post("/", passport.authenticate("local", {
-  successRedirect: "/userProfile",
-  failureRedirect: "/",
-  failureFlash: true, //disable/enable flash messaging but need flash package
-  passReqToCallback: true
-}));
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

@@ -21,8 +21,8 @@ const flash = require('connect-flash');
 mongoose.connect('mongodb://localhost:27017/jobot');
 
 //INIITIALIZE ROUTES
-const index = require('./routes/index-routes');
 const authRoutes = require('./routes/auth-routes');
+const index = require('./routes/index-routes');
 const User = require('./models/users');
 
 const app = express();
@@ -39,11 +39,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use(flash());
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 passport.serializeUser((user, cb) => {
   console.log('passport serializer',user);
   cb(null, user.id);
@@ -59,19 +54,19 @@ passport.deserializeUser((id, cb) => {
 
 passport.use(new LocalStrategy({
   passReqToCallback: true
-  }, (req,username, password, next) => {
-  console.log('passport localstrategy');
+}, (req, username, password, next) => {
   User.findOne({ username }, (err, user) => {
     if (err) {
       return next(err);
     }
     if (!user) {
+      console.log("USER ERROR");
       return next(null, false, { message: "Incorrect username" });
     }
     if (!bcrypt.compareSync(password, user.password)) {
+      console.log("PASSWORD ERROR");
       return next(null, false, { message: "Incorrect password" });
     }
-
     return next(null, user);
   });
 }));
@@ -140,6 +135,10 @@ app.use(expressLayouts);
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, "bower_components")));
+
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', authRoutes);
 app.use('/', index);
