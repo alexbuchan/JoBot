@@ -4,7 +4,7 @@
   <input type="text" name="username" placeholder="JoBot" required>
 
   <label for="password">Password</label>
-  <input type="password" name="password" placeholder="findmeajob" required>
+  <input id="signupStrength" type="password" name="password" placeholder="findmeajob" required>
 
   <% if (typeof errorMessage !== "undefined") { %>
     <div class="error-message"><%= errorMessage %></div>
@@ -19,5 +19,17 @@
     <a href="/auth/google">Sign in with Google+</a>
   </div>
 </form>
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="./strength.js/src/strength.js"></script>
+<script>
+  $(document).ready(function($) {	
+  $('#signupStrength').strength({
+    strengthClass: 'strength',
+    strengthMeterClass: 'strength_meter',
+    strengthButtonClass: 'button_strength',
+    strengthButtonText: 'Show password',
+    strengthButtonTextToggle: 'Hide Password'
+    });
+  });
+</script>
 <p><a href="/">Home</a></p>
