@@ -43,21 +43,26 @@ router.post('/signup', (req, res, next) => {
 
     newUser.save((err) => {
       if (err) { return next(err); }
-      res.redirect('auth/userProfile');
+      console.log("new user saved!");
+      res.redirect('/userProfile');
     });
   });
 });
 
 
-//SIGNUP ########## SIGNUP ##########SIGNUP ########## SIGNUP ##########SIGNUP ##########SIGNUP ##########
+//USERPROFILE ########## USERPROFILE USERPROFILE ########## USERPROFILE ########## USERPROFILE ##########
 
-
-router.get('/userProfile', (req, res, next) => {
-  res.render('userProfile');
+router.get('/userProfile', ensureAuthenticated, (req, res, next) => {
+  res.render('auth/userProfile');
 });
 
-
-
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next(); 
+  } else {
+    res.redirect('/')
+  }
+}
 
 router.get('/logout', (req, res, next) => {
     req.logout();
@@ -85,3 +90,5 @@ router.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
 });
 
 module.exports = router;
+
+
