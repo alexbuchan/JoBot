@@ -6,5 +6,16 @@ const passport = require("passport");
 const ensureLogin = require("connect-ensure-login");
 const flash = require('connect-flash');
 
-
 /* GET home page. */
+router.get('/', (req, res, next) => {
+  res.render("index");
+});
+
+router.post("/", passport.authenticate("local", {
+  successRedirect: "/userProfile",
+  failureRedirect: "/",
+  failureFlash: true, //disable/enable flash messaging but need flash package
+  passReqToCallback: true
+}));
+
+module.exports = router;

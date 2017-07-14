@@ -12,7 +12,7 @@ const bcryptSalt = 10;
 
 //SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ##########
 router.get('/signup', (req, res, next) => {
-  res.render('signup');
+  res.render('signup', { "message": req.flash("error") });
 });
 
 router.post('/signup', (req, res, next) => {
@@ -84,6 +84,8 @@ function ensureAuthenticated(req, res, next) {
 
 router.get('/logout', (req, res, next) => {
     req.logout();
+    delete res.locals.currentUser;
+    delete req.session.passport;
     res.redirect('/');
 });
 
