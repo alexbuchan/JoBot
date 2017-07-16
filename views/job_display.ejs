@@ -1,0 +1,22 @@
+<h1>Search Results</h1>
+
+ <ul>
+  <% jobs.forEach((job) => { %>
+    <li>
+      <%= job.title %> - $<%= job.company %> - <%= job.city %> - $<%= job.requirements %>
+    </li>
+  <%  }) %>
+</ul> 
+
+<form action="/userProfile">
+	<button type="submit" class="btn btn-primary btn-block">User Profile</button>
+</form>
+<form action="/dashboard">
+	<button type="submit" class="btn btn-primary btn-block">Dashboard</button>
+</form>
+<form action="/search">
+	<button type="submit" class="btn btn-primary btn-block">Search</button>
+</form>
+<form action="/logout">
+	<button type="submit" class="btn btn-primary btn-block">Logout</button>
+</form>

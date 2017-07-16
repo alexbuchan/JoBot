@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 var auth    = require('../helpers/auth');
+const Job = require('../models/jobs');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -18,6 +19,13 @@ router.get('/dashboard', auth.checkLoggedIn('You must be login', '/login'), func
 
 router.get('/search', auth.checkLoggedIn('You must be login', '/login'), function(req, res, next) {
   res.render('search', { user: JSON.stringify(req.user) });
+});
+
+router.get('/job_display', (req, res, next)=> {
+  Job.find({}, (err,jobs)=>{
+    if(err) {return next(err)}
+    res.render('job_display', { jobs });
+  });
 });
 
 router.get('/admin', auth.checkLoggedIn('You must be login', '/login'), auth.checkCredentials('ADMIN'), function(req, res, next) {
