@@ -3,89 +3,81 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
-const passport = require("passport");
-const ensureLogin = require("connect-ensure-login");
-const flash = require('connect-flash');
-
+const passport = require('../helpers/passport');
 const bcryptSalt = 10;
 
-
 //SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ##########
-router.get('/signup', (req, res, next) => {
-  res.render('signup');
+router.get('/signup', function(req, res, next) {
+  res.render('auth/signup', { "message": req.flash("error") });
 });
 
-router.post('/signup', (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
+router.post("/signup", (req, res, next) => {
+  var username = req.body.username;
+  var password = req.body.password;
 
   if (username === "" || password === "") {
-    res.render("signup", {
-      errorMessage: "Indicate a username and a password to sign up"
-    });
+  	req.flash('error', 'Indicate username and password' );
+    res.render("auth/signup", { "message": req.flash("error") });
     return;
   }
 
-  User.findOne({ username: username }, 'username', (err, user) =>{
+  User.findOne({ username }, "username", (err, user) => {
     if (user !== null) {
-      res.render("signup", {
-        errorMessage: "The username already exists"
-      });
+    	req.flash('error', 'The username already exists' );
+      res.render("auth/signup", { message: req.flash("error") });
       return;
     }
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);
 
-    const newUser = new User({
-      username: username,
-      password: hashPass,
+    var salt     = bcrypt.genSaltSync(bcryptSalt);
+    var hashPass = bcrypt.hashSync(password, salt);
+
+    var newUser = User({
+      username,
+      password: hashPass
     });
 
     newUser.save((err) => {
       if (err) {
-        req.flash('error', 'The username already exists!');
-        res.render('signup', { "message": req.flash('error') });
-      }
-      else {
-        console.log("new user saved!");
-        passport.authenticate('local')(req, res, function(){
-          res.redirect('/userProfile');
+      	req.flash('error', 'The username already exists' );
+        res.render("auth/signup", { message: req.flash('error') });
+      } else {
+        passport.authenticate("local")(req, res, function () {
+           res.redirect('/userProfile');
         });
       }
     });
   });
 });
 
-
-//USERPROFILE ########## USERPROFILE USERPROFILE ########## USERPROFILE ########## USERPROFILE ##########
-
-router.get('/userProfile', ensureAuthenticated, (req, res, next) => {
-  res.render('auth/userProfile');
+router.get("/login", (req, res, next) => {
+  res.render("auth/login", { "message": req.flash("error") });
 });
 
-//AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ##########
-
-router.post("/", passport.authenticate("local", {
+router.post("/login", passport.authenticate("local", {
   successRedirect: "/userProfile",
-  failureRedirect: "/",
-  failureFlash: true, //disable/enable flash messaging but need flash package
+  failureRedirect: "/login",
+  failureFlash: true,
   passReqToCallback: true
 }));
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log("USER AUTHENTICATED");
-    return next();
-  } else {
-    console.log("USER NOT AUTHENTICATED :(");
-    res.redirect('/');
-  }
-}
-
-router.get('/logout', (req, res, next) => {
-    req.logout();
-    res.redirect('/');
+//LOGOUT ########## LOGOUT ########## LOGOUT ########## LOGOUT ########## LOGOUT ########## 
+router.get("/logout", (req, res) => {
+  req.logout();
+  delete res.locals.currentUser;
+  delete req.session.passport;
+  // delete currentUser and passport properties 
+  // becasuse when we calling req.logout() is leaving an empty object inside both properties.
+  res.redirect('/');
+  
 });
+
+router.get("/auth/facebook",          passport.authenticate("facebook"));
+router.get("/auth/facebook/callback", passport.authenticate("facebook", {
+  successRedirect: "/userProfile",
+  failureRedirect: "/"
+}));
+
+//AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ##########
 
 router.get("/auth/facebook", passport.authenticate("facebook"));
 router.get("/auth/facebook/callback", passport.authenticate("facebook", {
@@ -102,6 +94,5 @@ router.get("/auth/google/callback", passport.authenticate("google", {
   successRedirect: "/userProfile",
   failureRedirect: "/"
 }));
-
 
 module.exports = router;
