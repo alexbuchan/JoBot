@@ -42,7 +42,7 @@ router.post("/signup", (req, res, next) => {
         res.render("auth/signup", { message: req.flash('error') });
       } else {
         passport.authenticate("local")(req, res, function () {
-           res.redirect('/secret');
+           res.redirect('/userProfile');
         });
       }
     });
