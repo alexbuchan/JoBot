@@ -1,12 +1,15 @@
 <h1>Search Results</h1>
 
- <ul>
+ <ol>
   <% jobs.forEach((job) => { %>
-    <li>
-      <%= job.title %> - $<%= job.company %> - <%= job.city %> - $<%= job.requirements %>
-    </li>
+    <div class="job-listing">
+      <li>
+        TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
+        <button class="job-apply">APPLY</button>
+      </li>
+    </div>
   <%  }) %>
-</ul> 
+  </ol> 
 
 <form action="/userProfile">
 	<button type="submit" class="btn btn-primary btn-block">User Profile</button>

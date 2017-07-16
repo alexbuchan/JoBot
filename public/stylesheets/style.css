@@ -38,3 +38,11 @@ a {
 	background-size: cover;
 	width: 30%;
 }
+
+.job-listing{
+	border: 1px solid black;
+}
+
+button.job-apply{
+	position: relative;
+}
