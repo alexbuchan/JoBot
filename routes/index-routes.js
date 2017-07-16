@@ -8,11 +8,13 @@ router.get('/', (req, res, next) => {
   res.render('index', { title: 'JoBot' });
 });
 
-router.get('/userProfile', auth.checkLoggedIn('You must be login', '/login'), function(req, res, next) {
+
+
+router.get('/userProfile', auth.checkLoggedIn('You must be logged in', '/'), function(req, res, next) {
   res.render('userProfile', { user: JSON.stringify(req.user) });
 });
 
-router.get('/admin', auth.checkLoggedIn('You must be login', '/login'), auth.checkCredentials('ADMIN'), function(req, res, next) {
+router.get('/admin', auth.checkLoggedIn('You must be logged in', '/'), auth.checkCredentials('ADMIN'), function(req, res, next) {
 	// console.log(req.user);
   res.render('admin', { user: JSON.stringify(req.user) });
 });

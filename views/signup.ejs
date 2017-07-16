@@ -1,35 +1,25 @@
-<form action="/signup" method="POST" id="form">
-  <h2>JoBot Sign Up views</h2>
-  <label for="username">Username</label>
-  <input type="text" name="username" placeholder="JoBot" required>
-
-  <label for="password">Password</label>
-  <input id="signupStrength" type="password" name="password" placeholder="findmeajob" required>
-
-  <% if (typeof errorMessage !== "undefined") { %>
-    <div class="error-message"><%= errorMessage %></div>
-  <% } %>
-
-  <button>SIGN UP</button>
-
-  <div>
-    <a href="/auth/facebook">Sign in with Facebook</a>
+<div class="signup">
+  <div class="panel panel-default">
+    <div class="panel-heading">Sign Up</div>
+    <div class="panel-body">
+      <form action="/signup" method="POST">
+        <div class="form-group">
+          <label for="usernameInput">Username</label>
+          <input type="email" class="form-control" id="username" placeholder="Username" name="username">
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input type="password" class="form-control" id="signupStrength" placeholder="Password" name="password">
+        </div>
+        <!-- <% if (typeof(message) != "undefined") { %> -->
+          <!-- <div class="alert alert-danger" role="alert"><%= message %></div> -->
+        <!-- <% } %> -->
+        <% if ( message != "" ) { %>
+          <div class="alert alert-danger" role="alert"><%= message %></div>
+        <% } %>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      </form>
+    </div>
   </div>
-  <div>
-    <a href="/auth/google">Sign in with Google+</a>
-  </div>
-</form>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="./strength.js/src/strength.js"></script>
-<script>
-  $(document).ready(function($) {	
-  $('#signupStrength').strength({
-    strengthClass: 'strength',
-    strengthMeterClass: 'strength_meter',
-    strengthButtonClass: 'button_strength',
-    strengthButtonText: 'Show password',
-    strengthButtonTextToggle: 'Hide Password'
-    });
-  });
-</script>
-<p><a href="/">Home</a></p>
+
+</div>
