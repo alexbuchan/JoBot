@@ -14,6 +14,8 @@ router.get('/signup', function(req, res, next) {
 router.post("/signup", (req, res, next) => {
   var username = req.body.username;
   var password = req.body.password;
+  var firstName = req.body.firstName;
+  var lastName = req.body.lastName;
 
   if (username === "" || password === "") {
   	req.flash('error', 'Indicate username and password' );
@@ -33,7 +35,9 @@ router.post("/signup", (req, res, next) => {
 
     var newUser = User({
       username,
-      password: hashPass
+      password: hashPass,
+      firstName,
+      lastName,
     });
 
     newUser.save((err) => {
