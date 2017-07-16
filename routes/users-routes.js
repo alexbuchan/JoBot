@@ -4,6 +4,7 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  console.log('users-routes get');
   res.send('respond with a resource');
 });
 

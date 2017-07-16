@@ -1,0 +1,40 @@
+<h2>User Profile</h2>
+
+<img src="" alt="User Avatar">
+
+<a href="userProfile/dashboard">Dashboard</a>
+<a href="/search">Job Search!</a>
+<a href="/logout">Log out</a>
+
+<div class="visible">
+  <form action="/signup" method="POST" id="form">
+    <h2>JoBot Sign Up views</h2>
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="JoBot" required>
+
+    <label for="password">Password</label>
+    <input id="signupStrength" type="password" name="password" placeholder="findmeajob" required>
+
+    <% if (typeof errorMessage !== "undefined") { %>
+      <div class="error-message"><%= errorMessage %></div>
+    <% } %>
+
+    <button>SIGN UP</button>
+
+    <div>
+      <a href="/auth/facebook">Sign in with Facebook</a>
+    </div>
+    <div>
+      <a href="/auth/google">Sign in with Google+</a>
+    </div>
+  </form>
+
+</div>
+=======
+<p><a href="userProfile/dashboard">Dashboard</a></p>
+<p><a href="/search">Job Search!</a></p>
+<p><a href="/logout">Log out</a></p>
+
+<pre><code>
+	<%= user %>
+</code></pre>
