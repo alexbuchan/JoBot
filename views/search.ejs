@@ -1,0 +1,34 @@
+<h1>SEARCH</h1>
+<div class="search">
+  <div class="panel panel-default">
+    <div class="panel-heading">Search Tool</div>
+    <div class="panel-body">
+      <form action="/search" method="POST">
+        <div class="form-group">
+          <label for="cityInput">City</label>
+          <input type="city" class="form-control" id="citySearch" placeholder="City" name="city">
+        </div>
+        <div class="form-group">
+          <label for="CountryInput">Country</label>
+          <input type="country" class="form-control" id="countrySearch" placeholder="Country" name="country">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">START SEARCH</button>
+      </form>  
+    </div>
+  </div>
+</div>
+
+
+<form action="/dashboard">
+	<button type="submit" class="btn btn-primary btn-block">Dashboard</button>
+</form>
+<form action="/userProfile">
+	<button type="submit" class="btn btn-primary btn-block">User Profile</button>
+</form>
+<form action="/logout">
+	<button type="submit" class="btn btn-primary btn-block">Logout</button>
+</form>
+
+<pre><code>
+	<%= user %>
+</code></pre>

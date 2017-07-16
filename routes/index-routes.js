@@ -17,25 +17,15 @@ router.get('/userProfile', auth.checkLoggedIn('You must be logged in', '/'), fun
   res.render('userProfile', { user: JSON.stringify(req.user) });
 });
 
-router.post("/", passport.authenticate("local", {
-  successRedirect: "/userProfile",
-  failureRedirect: "/",
-  failureFlash: true, //disable/enable flash messaging but need flash package
-  passReqToCallback: true
-}));
+router.get('/dashboard', auth.checkLoggedIn('You must be login', '/login'), function(req, res, next) {
+  res.render('dashboard', { user: JSON.stringify(req.user) });
+});
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log("USER AUTHENTICATED");
-    return next();
-  } else {
-    console.log("USER NOT AUTHENTICATED :(");
-    res.redirect('/');
-  }
-}
+router.get('/search', auth.checkLoggedIn('You must be login', '/login'), function(req, res, next) {
+  res.render('search', { user: JSON.stringify(req.user) });
+});
 
-
-router.get('/admin', auth.checkLoggedIn('You must be logged in', '/'), auth.checkCredentials('ADMIN'), function(req, res, next) {
+router.get('/admin', auth.checkLoggedIn('You must be login', '/login'), auth.checkCredentials('ADMIN'), function(req, res, next) {
 	// console.log(req.user);
   res.render('admin', { user: JSON.stringify(req.user) });
 });
