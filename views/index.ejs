@@ -1,3 +1,25 @@
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
+
 <img class="home-pic" src="images/robot.png" alt="JoBot picture">
+<form action="/" method="POST" id="form">
+
+  <label for="username">Username</label>
+  <input type="text" name="username" placeholder="JoBot" required>
+
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="findmeajob" required>
+
+  <% if (typeof errorMessage !== "undefined") { %>
+    <div class="error-message"><%= message %></div>
+  <% } %>
+
+  <button type="submit" class="btn btn-primary btn-block">Login</button>
+  </form>
+  <form action="/auth/facebook">
+    <button type="submit" class="btn btn-primary btn-block">Login With Facebook</button>
+  </form>
+  <form action="/auth/google">
+    <button type="submit" class="btn btn-primary btn-block">Login with Google+</button>
+  </form>
+

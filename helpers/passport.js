@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 const bcrypt        = require("bcrypt");
 const passport 			= require('passport');
 const LocalStrategy = require("passport-local").Strategy;
@@ -12,8 +13,8 @@ const FACEBOOK_CLIENT_ID    = "1897483983846107";
 const FACEBOOK_CLIENTSECRET = "c568a393c1b963c4be74cd838a86939f";
 
 
-passport.serializeUser((user, cb)   => { cb(null, user) });
-passport.deserializeUser((user, cb) => { cb(null, user) });
+passport.serializeUser((user, cb)   => { cb(null, user); });
+passport.deserializeUser((user, cb) => { cb(null, user); });
 
 passport.use(new LocalStrategy({
 		passReqToCallback: true
@@ -41,5 +42,5 @@ passport.use(new FbStrategy({
 	  done(null, profile);
 	}));
 
-	
+
 module.exports = passport;
