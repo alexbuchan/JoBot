@@ -1,64 +1,74 @@
 <h1>Welcome <%= currentUser.user.username %></h1>
 <h2>User Profile</h2>
+<img style="width:100px; border-radius:50%;" src="<%= user.avatar %>" alt="An image">
 
-<img src="" alt="User Avatar">
+
+<section>
+  <form class="avatarForm" action="/userProfile" method="post" enctype="multipart/form-data">
+    <input type="text" name="name">
+    <input type="file" name="photo">
+    <button class="btn btn-primary avatarRegisterButton" type="submit">Save Avatar</button>
+  </form>
+</section>
+
 
 <a href="dashboard">Dashboard</a>
 <a href="search">Job Search!</a>
 <a href="logout">Log out</a>
 
 <div class="visible">
+
   <button id="editUserInfoButton" value="Edit Profile Details">Add Profile Details</button>
 
-  <div id="userEditForm" class="">
-    <form action="/signup" method="POST" id="form2">
-      <h3>Edit Profile Details:</h3>
-      <p><label for="username">Username</label>
-      <input type="text" name="username" placeholder="<%= currentUser.user.username %>"></p>
+  <form style="border:1px solid black; margin: 10px;" class="userEditForm" action="/" method="POST" id="form2">
+    <h3>Edit Profile Details:</h3>
+    <p><label for="username">Username</label>
+    <input type="text" name="username" placeholder="<%= currentUser.user.username %>"></p>
 
-      <p><label for="password">Password</label>
-      <input id="signupStrength" type="password" name="password" placeholder="<%= currentUser.user.password %>"></p>
+    <p><label for="password">Password</label>
+    <input id="signupStrength" type="password" name="password" placeholder="<%= currentUser.user.password %>"></p>
 
-      <div class="username">
-        <label for="firstName">firstName</label>
-        <input type="text" name="firstName" placeholder="<%= 'first name' || currentUser.user.firstName %>">
+    <div class="username">
+      <label for="firstName">firstName</label>
+      <input type="text" name="firstName" placeholder="<%= 'first name' || currentUser.user.firstName %>">
 
-        <label for="lastName">lastName</label>
-        <input type="text" name="lastName" placeholder="lastName">
-      </div>
+      <label for="lastName">lastName</label>
+      <input type="text" name="lastName" placeholder="lastName">
+    </div>
 
-      <p><label for="age">age</label>
-      <input type="text" name="age" placeholder="age"></p>
+    <p><label for="age">age</label>
+    <input type="text" name="age" placeholder="age"></p>
 
-      <label for="email">email</label>
-      <input type="email" name="email" placeholder="email">
+    <label for="email">email</label>
+    <input type="email" name="email" placeholder="email">
 
-      <label for="phone_number">phone number</label>
-      <input type="text" name="phone_number" placeholder="phone number">
+    <label for="phone_number">phone number</label>
+    <input type="text" name="phone_number" placeholder="phone number">
 
-      <p><label for="occupation">occupation</label>
-      <input type="text" name="occupation" placeholder="occupation"></p>
+    <p><label for="occupation">occupation</label>
+    <input type="text" name="occupation" placeholder="occupation"></p>
 
 
-      <div class="address">
-        <h4>Address</h4>
-        <label for="street">street</label>
-        <input type="text" name="street" placeholder="street">
+    <div class="address">
+      <h4>Address</h4>
+      <label for="street">street</label>
+      <input type="text" name="street" placeholder="street">
 
-        <label for="number">number</label>
-        <input type="text" name="number" placeholder="number">
+      <label for="number">number</label>
+      <input type="text" name="number" placeholder="number">
 
-        <p><label for="city">city</label>
-        <input type="text" name="city" placeholder="city"></p>
+      <p><label for="city">city</label>
+      <input type="text" name="city" placeholder="city"></p>
 
-        <p><label for="country">country</label>
-        <input type="text" name="country" placeholder="country"></p>
+      <p><label for="country">country</label>
+      <input type="text" name="country" placeholder="country"></p>
 
-        <p><label for="zip_code">zip code</label>
-        <input type="text" name="zip_code" placeholder="zip code"></p>
-      </div>
-  </form>
-</div>
+      <p><label for="zip_code">zip code</label>
+      <input type="text" name="zip_code" placeholder="zip code"></p>
+    </div>
+
+    <button type="submit" class="btn btn-primary userEditFormButton">Save Profile Info</button>
+</form>
 
 <form action="/dashboard">
 	<button type="submit" class="btn btn-primary btn-block">Dashboard</button>
@@ -69,7 +79,3 @@
 <form action="/logout">
 	<button type="submit" class="btn btn-primary btn-block">Logout</button>
 </form>
-
-<pre><code>
-	<%= user %>
-</code></pre>
