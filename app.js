@@ -1,4 +1,11 @@
 /*jshint esversion: 6*/
+
+/*
+################### ################### ###################
+                    ON DEVELOPER BRANCH
+################### ################### ###################
+*/
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -23,12 +30,14 @@ const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 mongoose.connect(`mongodb://localhost:${portDB}/${databaseName}`);
 
 //INIITIALIZE ROUTES
+
 const authRoutes = require('./routes/auth-routes');
 const index = require('./routes/index-routes');
 const User = require('./models/users');
 const Job = require('./models/jobs');
 
 const app = express();
+
 
 // view engine setup
 app.set('layout', 'layouts/main');

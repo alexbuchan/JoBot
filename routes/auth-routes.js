@@ -7,8 +7,9 @@ const passport = require('../helpers/passport');
 const bcryptSalt = 10;
 
 //SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ##########
+
 router.get('/signup', function(req, res, next) {
-  res.render('auth/signup', { "message": req.flash("error") });
+  res.render('signup', { "message": req.flash("error") });
 });
 
 router.post("/signup", (req, res, next) => {
@@ -19,14 +20,14 @@ router.post("/signup", (req, res, next) => {
 
   if (username === "" || password === "") {
   	req.flash('error', 'Indicate username and password' );
-    res.render("auth/signup", { "message": req.flash("error") });
+    res.render("signup", { "message": req.flash("error") });
     return;
   }
 
   User.findOne({ username }, "username", (err, user) => {
     if (user !== null) {
     	req.flash('error', 'The username already exists' );
-      res.render("auth/signup", { message: req.flash("error") });
+      res.render("signup", { message: req.flash("error") });
       return;
     }
 
@@ -43,7 +44,7 @@ router.post("/signup", (req, res, next) => {
     newUser.save((err) => {
       if (err) {
       	req.flash('error', 'The username already exists' );
-        res.render("auth/signup", { message: req.flash('error') });
+        res.render("signup", { message: req.flash('error') });
       } else {
         passport.authenticate("local")(req, res, function () {
            res.redirect('/userProfile');
@@ -53,26 +54,14 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
-router.get("/login", (req, res, next) => {
-  res.render("auth/login", { "message": req.flash("error") });
-});
-
-router.post("/login", passport.authenticate("local", {
-  successRedirect: "/userProfile",
-  failureRedirect: "/login",
-  failureFlash: true,
-  passReqToCallback: true
-}));
-
-//LOGOUT ########## LOGOUT ########## LOGOUT ########## LOGOUT ########## LOGOUT ########## 
+//LOGOUT ########## LOGOUT ########## LOGOUT ########## LOGOUT ########## LOGOUT ##########
 router.get("/logout", (req, res) => {
   req.logout();
   delete res.locals.currentUser;
   delete req.session.passport;
-  // delete currentUser and passport properties 
+  // delete currentUser and passport properties
   // becasuse when we calling req.logout() is leaving an empty object inside both properties.
   res.redirect('/');
-  
 });
 
 //AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ##########
