@@ -38,13 +38,13 @@ const Job = require('./models/jobs');
 
 const app = express();
 
-
+app.use(expressLayouts);
 // view engine setup
 app.set('layout', 'layouts/main');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(expressLayouts);
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

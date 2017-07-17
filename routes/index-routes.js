@@ -4,8 +4,11 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/users');
 const passport = require('../helpers/passport');
-var auth    = require('../helpers/auth');
+const auth    = require('../helpers/auth');
 const Job = require('../models/jobs');
+const multer = require('multer');
+const Picture = require('../models/picture');
+const upload = multer({ dest: './public/uploads/' });
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -19,17 +22,47 @@ router.post("/", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log("USER AUTHENTICATED");
-    return next();
-  } else {
-    console.log("USER NOT AUTHENTICATED :(");
-    res.redirect('/');
-  }
-}
+// ########### UPLOAD AVATAR ########### UPLOAD AVATAR ########### UPLOAD AVATAR ########### UPLOAD AVATAR ###########
+
+router.post('/userProfile', upload.single('photo'), function(req, res){
+  var userID = req.session.passport.user._id;
+
+  let pic = new Picture({
+    name: req.body.name,
+    pic_path: `./uploads/${req.file.filename}`,
+    pic_name: req.file.originalname
+  });
+  console.log("picture",pic);
+  pic.save((err,pic) => {
+    if(err){res.redirect('/'); }
+    else {
+      User.findByIdAndUpdate(userID, { $set: { avatar: pic.pic_path }}, function (err, user) {
+        console.log('in function before error');
+        if (err) { return next(err); } else{
+          console.log('after error in function');
+          res.render('userProfile', {user});
+          // res.redirect('/userProfile')
+          console.log('what the hell');
+        }
+
+      });
+    }
+  });
+  console.log('before update');
+
+
+});
+
+router.get('/', function(req, res, next) {
+  Picture.find((err, pic) => {
+    res.render('index', {pic});
+  });
+});
+
+// ########### VIEWS ########### VIEWS ########### VIEWS ########### VIEWS ########### VIEWS ########### VIEWS ###########
 
 router.get('/userProfile', auth.checkLoggedIn('You must be logged in', '/'), function(req, res, next) {
+  console.log("userProfile",JSON.stringify(req.user));
   res.render('userProfile', { user: JSON.stringify(req.user) });
 });
 
