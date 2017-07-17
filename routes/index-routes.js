@@ -81,19 +81,21 @@ router.get('/job_display', (req, res, next)=> {
   });
 });
 
-// router.get('/jobshow', auth.checkLoggedIn('You must be logged in', '/'), function(req, res, next) {
-//   res.render('jobshow', { user: JSON.stringify(req.user) });
-// });
+router.post('/job_display/:id', (req,res,next)=>{
+  const jobID = req.params.id;
+  const userID = req.session.currentUser._id;
 
+  User.findByIdAndUpdate(
+    userID,
+    {$push: {"jobsApplied": {type: jobID}}},
+    (err, job) => {
+      if(err) {return next(err)}
+      else {
+        res.render('job_display');
+      }
+    } 
 
-router.get('/jobshow/:id', auth.checkLoggedIn('You must be logged in', '/'), (req, res, next) => {
-  const jobId = req.params.id;
-
-  Job.findById(jobId, (err, job) => {
-    console.log(jobId);
-    if (err) { return next(err); }
-    res.render('jobshow',{ job });
-  });
+  )
 });
 
 module.exports = router;

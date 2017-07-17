@@ -21,6 +21,7 @@ const userSchema = new Schema({
   },
   facebookID: String,
   googleID: String,
+  jobsApplied: [{type: Schema.Types.ObjectId, ref: 'Job'}]
   }, {
   timestamps: {
     createdAt: "created_at",
