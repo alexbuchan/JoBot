@@ -81,13 +81,21 @@ router.get('/job_display', (req, res, next)=> {
   });
 });
 
-router.get('/:id', (req, res, next) => {
+router.post('/job_display/:id', (req,res,next)=>{
   const jobID = req.params.id;
+  const userID = req.session.currentUser._id;
 
-  Job.findById(jobID, (err, job) => {
-    if (err) { return next(err); }
-    res.render('userProfile', { job: job });
-  });
+  User.findByIdAndUpdate(
+    userID,
+    {$push: {"jobsApplied": {type: jobID}}},
+    (err, job) => {
+      if(err) {return next(err)}
+      else {
+        res.render('job_display');
+      }
+    } 
+
+  )
 });
 
 module.exports = router;
