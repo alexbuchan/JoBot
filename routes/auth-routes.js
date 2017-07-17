@@ -75,15 +75,9 @@ router.get("/logout", (req, res) => {
   
 });
 
-router.get("/auth/facebook",          passport.authenticate("facebook"));
-router.get("/auth/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: "/userProfile",
-  failureRedirect: "/"
-}));
-
 //AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ##########
 
-router.get("/auth/facebook", passport.authenticate("facebook"));
+router.get("/auth/facebook",          passport.authenticate("facebook"));
 router.get("/auth/facebook/callback", passport.authenticate("facebook", {
   successRedirect: "/userProfile",
   failureRedirect: "/"

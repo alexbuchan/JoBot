@@ -5,7 +5,9 @@
     <div class="job-listing">
       <li>
         TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
+        <form action="/job_display/<%= job._id %>">
         <button class="job-apply">APPLY</button>
+        </form>
       </li>
     </div>
   <%  }) %>

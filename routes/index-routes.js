@@ -28,6 +28,15 @@ router.get('/job_display', (req, res, next)=> {
   });
 });
 
+router.get('/:id', (req, res, next) => {
+  const jobID = req.params.id;
+  
+  Job.findById(jobID, (err, job) => {
+    if (err) { return next(err); }
+    res.render('userProfile', { job: job });
+  });
+});
+
 router.get('/admin', auth.checkLoggedIn('You must be login', '/login'), auth.checkCredentials('ADMIN'), function(req, res, next) {
 	// console.log(req.user);
   res.render('admin', { user: JSON.stringify(req.user) });
