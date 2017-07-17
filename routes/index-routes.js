@@ -44,13 +44,10 @@ router.post('/userProfile', upload.single('photo'), function(req, res){
           // res.redirect('/userProfile')
           console.log('what the hell');
         }
-
       });
     }
   });
   console.log('before update');
-
-
 });
 
 router.get('/', function(req, res, next) {
@@ -83,18 +80,18 @@ router.get('/job_display', (req, res, next)=> {
 
 router.post('/job_display/:id', (req,res,next)=>{
   const jobID = req.params.id;
-  const userID = req.session.currentUser._id;
-
-  User.findByIdAndUpdate(
+  const userID = req.session.passport.user._id;
+  console.log("ENTER JOB POST",jobID,userID);
+  User.findById(
     userID,
-    {$push: {"jobsApplied": {type: jobID}}},
+    {$push: {"jobsApplied": {type: 1232543413245}}},
     (err, job) => {
       if(err) {return next(err)}
       else {
+        console.log('got to render');
         res.render('job_display');
       }
     } 
-
   )
 });
 
