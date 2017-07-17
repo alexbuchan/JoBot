@@ -6,4 +6,10 @@ $(document).ready(function() {
     $("#userEditForm").addClass("visible");
     $("#userEditForm").toggle("invisible");
   });
+  // $('button.avatarRegisterButton').click( function() {
+  //      $('form.avatarForm').submit();
+  //  });
+  //  $('button.userEditFormButton').click( function() {
+  //      $('form.userEditForm').submit();
+  //  });
 });
