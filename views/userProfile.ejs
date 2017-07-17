@@ -3,9 +3,9 @@
 
 <img src="" alt="User Avatar">
 
-<a href="userProfile/dashboard">Dashboard</a>
-<a href="/search">Job Search!</a>
-<a href="/logout">Log out</a>
+<a href="dashboard">Dashboard</a>
+<a href="search">Job Search!</a>
+<a href="logout">Log out</a>
 
 <div class="visible">
   <button id="editUserInfoButton" value="Edit Profile Details">Add Profile Details</button>
@@ -14,14 +14,14 @@
     <form action="/signup" method="POST" id="form2">
       <h3>Edit Profile Details:</h3>
       <p><label for="username">Username</label>
-      <input type="text" name="username" placeholder="JoBot" required></p>
+      <input type="text" name="username" placeholder="<%= currentUser.user.username %>"></p>
 
       <p><label for="password">Password</label>
-      <input id="signupStrength" type="password" name="password" placeholder="findmeajob" required></p>
+      <input id="signupStrength" type="password" name="password" placeholder="<%= currentUser.user.password %>"></p>
 
       <div class="username">
         <label for="firstName">firstName</label>
-        <input type="text" name="firstName" placeholder="firstName">
+        <input type="text" name="firstName" placeholder="<%= 'first name' || currentUser.user.firstName %>">
 
         <label for="lastName">lastName</label>
         <input type="text" name="lastName" placeholder="lastName">
@@ -31,7 +31,7 @@
       <input type="text" name="age" placeholder="age"></p>
 
       <label for="email">email</label>
-      <input type="text" name="email" placeholder="email">
+      <input type="email" name="email" placeholder="email">
 
       <label for="phone_number">phone number</label>
       <input type="text" name="phone_number" placeholder="phone number">
@@ -57,10 +57,11 @@
         <p><label for="zip_code">zip code</label>
         <input type="text" name="zip_code" placeholder="zip code"></p>
       </div>
+  </form>
 </div>
 
 <form action="/dashboard">
-	<button type="submit" class="btn btn-primary btn-block">Dashboard</button>
+	<button type="submit" class="btn btn-primary btn-block">Dboard Yo!</button>
 </form>
 <form action="/search">
 	<button type="submit" class="btn btn-primary btn-block">Search</button>
