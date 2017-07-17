@@ -5,13 +5,13 @@
     <div class="job-listing">
       <li>
         TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
-        <form action="/job_display/<%= job._id %>">
+        <form action="/jobshow/<%= job._id %>">
         <button class="job-apply">APPLY</button>
         </form>
       </li>
     </div>
   <%  }) %>
-  </ol> 
+  </ol>   
 
 <form action="/userProfile">
 	<button type="submit" class="btn btn-primary btn-block">User Profile</button>
