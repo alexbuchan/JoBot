@@ -17,7 +17,6 @@ module.exports = {
 	      return next();
 	    } else {
 	    	req.flash('error', message );
-
 	      res.redirect(route);
 	    }
 	  };

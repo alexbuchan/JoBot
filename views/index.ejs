@@ -1,5 +1,8 @@
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+
+<img class="home-pic" src="images/robot.png" alt="JoBot picture">
 <form action="/" method="POST" id="form">
-  <h2>Welcome to JoBot! (index)</h2>
 
   <label for="username">Username</label>
   <input type="text" name="username" placeholder="JoBot" required>
@@ -8,22 +11,15 @@
   <input type="password" name="password" placeholder="findmeajob" required>
 
   <% if (typeof errorMessage !== "undefined") { %>
-    <div class="error-message"><%= errorMessage %></div>
+    <div class="error-message"><%= message %></div>
   <% } %>
 
-  <button>Log in</button>
+  <button type="submit" class="btn btn-primary btn-block">Login</button>
+  </form>
+  <form action="/auth/facebook">
+    <button type="submit" class="btn btn-primary btn-block">Login With Facebook</button>
+  </form>
+  <form action="/auth/google">
+    <button type="submit" class="btn btn-primary btn-block">Login with Google+</button>
+  </form>
 
-  <p class="account-message">
-    Don't have an account? <a href="/signup">Sign up</a>
-  </p>
-  <div>
-    <a href="/auth/facebook">Login With Facebook</a>
-  </div>
-  <div>
-    <a href="/auth/google">Login with Google+</a>
-  </div>
-</form>
-=======
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
-<img class="home-pic" src="images/robot.png" alt="JoBot picture">
