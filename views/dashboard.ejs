@@ -11,7 +11,10 @@
     <% user.jobsApplied.forEach((job) => { %>
       <div class="job-listing">
         <li>
-          TITLE:<%= job.title %> COMPANY:<%= job.company %> SALARY: $<%= job.salary %> 
+          TITLE:<%= job.title %> COMPANY:<%= job.company %> SALARY: $<%= job.salary %>
+          <form action="/dashboard/<%= job._id %>/delete" method="POST">
+            <button class="job-delete">DELETE</button>
+          </form>
         </li>
       </div>
     <%  }) %>
