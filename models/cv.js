@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const cvSchema = new Schema({
   filename: String,
+  filepath: String,
 });
 
 const CV = mongoose.model('CV',cvSchema);
