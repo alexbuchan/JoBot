@@ -2,19 +2,8 @@
 <h2>User Profile</h2>
 <img style="width:100px; border-radius:50%;" src="<%= user.avatar %>" alt="An image">
 
-
-<section>
-  <form class="avatarForm" action="/userProfile" method="post" enctype="multipart/form-data">
-    <input type="text" name="name">
-    <input type="file" name="photo">
-    <button class="btn btn-primary avatarRegisterButton" type="submit">Save Avatar</button>
-  </form>
-</section>
-
-
-<a href="dashboard">Dashboard</a>
-<a href="search">Job Search!</a>
-<a href="logout">Log out</a>
+<a href="/uploads">Add an avatar to your profile</a>
+<a href="/uploads">Add a CV/Resume to your profile</a>
 
 <div class="visible">
 
