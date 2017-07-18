@@ -21,6 +21,7 @@ const userSchema = new Schema({
   },
   facebookID: String,
   googleID: String,
+  cvs: [{type: Schema.Types.ObjectId, ref: 'CV'}],
   }, {
   timestamps: {
     createdAt: "created_at",
