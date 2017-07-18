@@ -74,61 +74,50 @@ router.get('/userProfile', auth.checkLoggedIn('You must be logged in', '/'), fun
   console.log("userProfile",JSON.stringify(req.user));
   res.render('userProfile', { user: JSON.stringify(req.user) });
 });
-
-//
 // ────────────────────────────────────────────────────────── IV ──────────
 //   :::::: D A S H B O A R D : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────
-//
 router.get('/dashboard', auth.checkLoggedIn('You must be logged in', '/'), function (req, res, next) {
   let userID = req.session.passport.user._id;
   User.findById(userID)
     .populate('jobsApplied')
     .exec(function(err, user) {
       if (err){ return next(err); }
-      console.log("This is the jobs applied:",user);
       res.render('dashboard', {user});
     });
 });
 
-// { $pull: { <field1>: <value|condition>, <field2>: <value|condition>, ... } }
-
 router.post('/dashboard/:id/delete', (req,res,next)=>{
   const jobID = req.params.id;
   const userID = req.session.passport.user._id;
-  console.log("DELETE POST FUNCTION", jobID, userID);
-  User.update( userID, {$pull: {jobsApplied:jobID}}, (err, job) => {
-      if(err) {
-        return next(err);
-      }
-      else {
-        User.findById(userID)
-          .populate('jobsApplied')
-          .exec(function(err, user) {
-            if (err){ return next(err); }
-            console.log("This is the jobs applied:",user);
-            res.render('dashboard', {user});
-          });
-      }
+  User.findByIdAndUpdate( userID, {$pull: {jobsApplied:jobID}}, function (err, job){
+    if(err) {
+      return next(err);
+    } else {
+      User.findById(userID)
+      .populate('jobsApplied')
+      .exec(function(err, user) {
+        if (err){ return next(err); }
+        res.render('dashboard', {user:user,layout:"layouts/test"});
+      });
     }
-  );
+  }
+);
 });
 
 
-//
 // ──────────────────────────────────────────────────── V ──────────
 //   :::::: S E A R C H : :  :   :    :     :        :          :
 // ──────────────────────────────────────────────────────────────
-//
+
 router.get('/search', auth.checkLoggedIn('You must be logged in', '/'), function(req, res, next) {
   res.render('search', { user: JSON.stringify(req.user) });
 });
 
-//
 // ────────────────────────────────────────────────────────────── VI ──────────
 //   :::::: J O B   D I S P L A Y : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────────
-//
+
 router.get('/job_display', (req, res, next)=> {
   Job.find({}, (err,jobs)=>{
     if(err) {return next(err); }
