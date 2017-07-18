@@ -152,5 +152,4 @@ router.post('/job_display/:id', (req,res,next)=>{
   });
 });
 
-
 module.exports = router;
