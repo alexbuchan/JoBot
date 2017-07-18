@@ -74,37 +74,47 @@ router.get('/userProfile', auth.checkLoggedIn('You must be logged in', '/'), fun
   console.log("userProfile",JSON.stringify(req.user));
   res.render('userProfile', { user: JSON.stringify(req.user) });
 });
-
-//
 // ────────────────────────────────────────────────────────── IV ──────────
 //   :::::: D A S H B O A R D : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────
-//
 router.get('/dashboard', auth.checkLoggedIn('You must be logged in', '/'), function (req, res, next) {
   let userID = req.session.passport.user._id;
   User.findById(userID)
     .populate('jobsApplied')
     .exec(function(err, user) {
       if (err){ return next(err); }
-      console.log("This is the jobs applied:",user);
       res.render('dashboard', {user});
     });
 });
 
-//
+router.post('/dashboard/:id/delete', (req,res,next)=>{
+  const jobID = req.params.id;
+  const userID = req.session.passport.user._id;
+  User.findByIdAndUpdate( userID, {$pull: {jobsApplied:jobID}}, function (err, job){
+    if(err) {
+      return next(err);
+    } else {
+      User.findById(userID)
+      .populate('jobsApplied')
+      .exec(function(err, user) {
+        if (err){ return next(err); }
+        res.render('dashboard', {user:user,layout:"layouts/test"});
+      });
+    }
+  }
+);
+});
+
 // ──────────────────────────────────────────────────── V ──────────
 //   :::::: S E A R C H : :  :   :    :     :        :          :
 // ──────────────────────────────────────────────────────────────
-//
 router.get('/search', auth.checkLoggedIn('You must be logged in', '/'), function(req, res, next) {
   res.render('search', { user: JSON.stringify(req.user) });
 });
 
-//
 // ────────────────────────────────────────────────────────────── VI ──────────
 //   :::::: J O B   D I S P L A Y : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────────
-//
 router.get('/job_display', (req, res, next)=> {
   Job.find({}, (err,jobs)=>{
     if(err) {return next(err); }
@@ -115,12 +125,10 @@ router.get('/job_display', (req, res, next)=> {
 router.post('/job_display/:id', (req,res,next)=>{
   const jobID = req.params.id;
   const userID = req.session.passport.user._id;
-  console.log("ENTER JOB POST",jobID,userID);
   User.findByIdAndUpdate( userID, {$push: {jobsApplied:jobID}}, function (err, job){
       if(err) {
         return next(err);
       } else {
-        console.log('got to render');
         Job.find({}, (err,jobs)=>{
           if(err) {return next(err); }
           res.render('job_display',{ jobs });
