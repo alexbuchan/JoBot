@@ -90,7 +90,7 @@ router.post('/job_display/:id', (req,res,next)=>{
   console.log("ENTER JOB POST",jobID,userID);
   User.findByIdAndUpdate( userID, {$push: {jobsApplied:jobID}}, function (err, job){
       if(err) {
-        return next(err)
+        return next(err);
       } else {
         console.log('got to render');
         Job.find({}, (err,jobs)=>{
@@ -98,8 +98,8 @@ router.post('/job_display/:id', (req,res,next)=>{
           res.render('job_display', { jobs });
         });
       }
-    } 
-  )
+    }
+  );
 });
 
 module.exports = router;
