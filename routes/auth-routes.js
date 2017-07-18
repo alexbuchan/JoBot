@@ -6,7 +6,11 @@ const User = require('../models/users');
 const passport = require('../helpers/passport');
 const bcryptSalt = 10;
 
-//SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ########## SIGNUP ##########
+//
+// ──────────────────────────────────────────────────── I ──────────
+//   :::::: S I G N U P : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────
+//
 
 router.get('/signup', function(req, res, next) {
   res.render('signup', { "message": req.flash("error") });
@@ -53,8 +57,11 @@ router.post("/signup", (req, res, next) => {
     });
   });
 });
-
-//LOGOUT ########## LOGOUT ########## LOGOUT ########## LOGOUT ########## LOGOUT ##########
+//
+// ──────────────────────────────────────────────────── II ──────────
+//   :::::: L O G O U T : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────
+//
 router.get("/logout", (req, res) => {
   req.logout();
   delete res.locals.currentUser;
@@ -64,8 +71,11 @@ router.get("/logout", (req, res) => {
   res.redirect('/');
 });
 
-//AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ########## AUTHENTICATION ##########
-
+//
+// ──────────────────────────────────────────────────────────────────── III ──────────
+//   :::::: A U T H E N T I C A T I O N : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────────────────
+//
 router.get("/auth/facebook",          passport.authenticate("facebook"));
 router.get("/auth/facebook/callback", passport.authenticate("facebook", {
   successRedirect: "/userProfile",

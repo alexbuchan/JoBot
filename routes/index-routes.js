@@ -10,7 +10,11 @@ const multer = require('multer');
 const Picture = require('../models/picture');
 const upload = multer({ dest: './public/uploads/' });
 
-/* GET home page. */
+//
+// ────────────────────────────────────────────────────────── I ──────────
+//   :::::: H O M E   P A G E : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────
+//
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'JoBot' });
 });
@@ -22,7 +26,11 @@ router.post("/", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
-// ########### UPLOAD AVATAR ########### UPLOAD AVATAR ########### UPLOAD AVATAR ########### UPLOAD AVATAR ###########
+//
+// ────────────────────────────────────────────────────────────────── II ──────────
+//   :::::: U P L O A D   A V A T A R : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────────────
+//
 
 router.post('/userProfile', upload.single('photo'), function(req, res){
   var userID = req.session.passport.user._id;
@@ -56,14 +64,22 @@ router.get('/', function(req, res, next) {
   });
 });
 
-// ########### VIEWS ########### VIEWS ########### VIEWS ########### VIEWS ########### VIEWS ########### VIEWS ###########
+//
+// ──────────────────────────────────────────────────────────────── III ──────────
+//   :::::: U S E R   P R O F I L E : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────────────
+//
 
 router.get('/userProfile', auth.checkLoggedIn('You must be logged in', '/'), function(req, res, next) {
   console.log("userProfile",JSON.stringify(req.user));
   res.render('userProfile', { user: JSON.stringify(req.user) });
 });
 
-
+//
+// ────────────────────────────────────────────────────────── IV ──────────
+//   :::::: D A S H B O A R D : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────
+//
 router.get('/dashboard', auth.checkLoggedIn('You must be logged in', '/'), function (req, res, next) {
   let userID = req.session.passport.user._id;
   User.findById(userID)
@@ -75,11 +91,20 @@ router.get('/dashboard', auth.checkLoggedIn('You must be logged in', '/'), funct
     });
 });
 
-
+//
+// ──────────────────────────────────────────────────── V ──────────
+//   :::::: S E A R C H : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────
+//
 router.get('/search', auth.checkLoggedIn('You must be logged in', '/'), function(req, res, next) {
   res.render('search', { user: JSON.stringify(req.user) });
 });
 
+//
+// ────────────────────────────────────────────────────────────── VI ──────────
+//   :::::: J O B   D I S P L A Y : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────────
+//
 router.get('/job_display', (req, res, next)=> {
   Job.find({}, (err,jobs)=>{
     if(err) {return next(err); }

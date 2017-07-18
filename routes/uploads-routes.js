@@ -39,44 +39,6 @@ router.post('/', upload.single('file'), (req, res, next) => {
       });
     }
   });
-
-  // if (!req.file) {
-  //   return res.status(400).send('No files were uploaded.');
-  // }
-  //
-  // let newCV = new CV({ filename: req.file.filename });
-  //
-  // newCV.save((err, cv) => {
-  //   if (err) {
-  //     console.log('Error in save method!');
-  //     return next(err);
-  //   }
-  //   else {
-  //     User.findByIdAndUpdate(userID, { $set: { newCV: pic.pic_path }}, (err, user) => {
-  //       if (err) { return next(err); }
-  //       else { res.redirect('/userProfile'); }
-  //     });
-  //   }
-  // });
-
 });
-//
-// router.post('/job_display/:id', (req,res,next)=>{
-//   const jobID = req.params.id;
-//   const userID = req.session.passport.user._id;
-//   console.log("ENTER JOB POST",jobID,userID);
-//   User.findByIdAndUpdate( userID, {$push: {jobsApplied:jobID}}, function (err, job){
-//       if(err) {
-//         return next(err);
-//       } else {
-//         console.log('got to render');
-//         Job.find({}, (err,jobs)=>{
-//           if(err) {return next(err); }
-//           res.render('job_display', { jobs });
-//         });
-//       }
-//     }
-//   );
-// });
 
 module.exports = router;
