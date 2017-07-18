@@ -4,15 +4,17 @@
 
 <h2>JOBS APPLIED LIST:</h2>
 <p>Number of Jobs: <%= currentUser.user.jobsApplied.length %>		</p>
-<ol>		
-  <% currentUser.user.jobsApplied.forEach((job,index) => { %>
-    <div class="job-listing">
-      <li>
-        <%= currentUser.user.jobsApplied[index] %>
-      </li>
-    </div>
-  <%  }) %>
-  </ol>   
+<p><%= jobs %></p>
+
+   <ol>		
+    <% jobs.jobsApplied.forEach((job) => { %>
+      <div class="job-listing">
+        <li>
+          <%= job.title %>
+        </li>
+      </div>
+    <%  }) %>
+    </ol>    
 	 
 <form action="/userProfile">
 	<button type="submit" class="btn btn-primary btn-block">User Profile</button>
