@@ -1,0 +1,36 @@
+<h2>Uploads</h2>
+<h4>Upload a CV/Resume or avatar.</h5>
+
+<section>
+  <h5>Add an avatar</h5>
+  <form class="avatarForm" action="/userProfile" method="post" enctype="multipart/form-data">
+    <input type="text" name="name">
+    <input type="file" name="photo">
+    <button class="btn btn-primary avatarRegisterButton" type="submit">Save Avatar</button>
+  </form>
+</section>
+
+<section>
+  <h5>Add a CV/Resume</h5>
+  <form id='uploadForm'
+    action='/uploads'
+    method='post'
+    encType="multipart/form-data">
+      <input type="file" name="file">
+      <button class="btn btn-primary avatarRegisterButton" type="submit">Save CV/Resume</button>
+  </form>
+</section>
+
+
+<form action="/userProfile">
+	<button type="submit" class="btn btn-primary btn-block">User Profile</button>
+</form>
+<form action="/dashboard">
+	<button type="submit" class="btn btn-primary btn-block">Dashboard</button>
+</form>
+<form action="/search">
+	<button type="submit" class="btn btn-primary btn-block">Search</button>
+</form>
+<form action="/logout">
+	<button type="submit" class="btn btn-primary btn-block">Logout</button>
+</form>

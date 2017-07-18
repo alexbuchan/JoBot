@@ -26,8 +26,10 @@ mongoose.connect(`mongodb://localhost:${portDB}/${databaseName}`);
 
 const authRoutes = require('./routes/auth-routes');
 const index = require('./routes/index-routes');
+const uploadRoutes = require('./routes/uploads-routes');
 const User = require('./models/users');
 const Job = require('./models/jobs');
+const CV = require('./models/cv');
 
 const app = express();
 
@@ -63,6 +65,7 @@ app.use(passport.session());
 
 app.use(auth.setCurrentUser);
 
+app.use('/uploads', uploadRoutes);
 app.use('/', authRoutes);
 app.use('/', index);
 
