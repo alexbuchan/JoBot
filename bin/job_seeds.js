@@ -1,3 +1,4 @@
+/*jshint esversion: 6*/
 const mongoose = require('mongoose');
 const portDB = require('../config').portDB;
 const databaseName = require('../config').databaseName;
@@ -45,7 +46,7 @@ Job.create(jobs, (err, docs) => {
     throw err;
   }
   docs.forEach((job) => {
-    console.log(job.name)
+    console.log(job.name);
   });
   mongoose.connection.close();
 });

@@ -63,24 +63,15 @@ router.get('/userProfile', auth.checkLoggedIn('You must be logged in', '/'), fun
   res.render('userProfile', { user: JSON.stringify(req.user) });
 });
 
-// router.get('/dashboard', auth.checkLoggedIn('You must be logged in', '/'), function (req, res, next) {
-//   var userID = req.session.passport.user;
-//   if (userID.jobsApplied.length > 0) {
-//     Job.findById(userID.jobsApplied[0], function (err, job) {
-//         console.log("job find by ID", job.title, job.company);
-//     });
-//   }
-//   res.render('dashboard', {user: JSON.stringify(req.user)});
-// });
 
 router.get('/dashboard', auth.checkLoggedIn('You must be logged in', '/'), function (req, res, next) {
-  var userID = req.session.passport.user._id;
+  let userID = req.session.passport.user._id;
   User.findById(userID)
     .populate('jobsApplied')
-    .exec(function(err, jobDocs) {
+    .exec(function(err, user) {
       if (err){ return next(err); }
-      console.log("This is the jobs applied:",jobDocs);
-      res.render('dashboard', {user: JSON.stringify(req.user),jobs:jobDocs});
+      console.log("This is the jobs applied:",user);
+      res.render('dashboard', {user});
     });
 });
 
