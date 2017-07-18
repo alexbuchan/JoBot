@@ -82,14 +82,15 @@ router.post('/job_display/:id', (req,res,next)=>{
   const jobID = req.params.id;
   const userID = req.session.passport.user._id;
   console.log("ENTER JOB POST",jobID,userID);
-  User.findById(
-    userID,
-    {$push: {"jobsApplied": {type: 1232543413245}}},
-    (err, job) => {
-      if(err) {return next(err)}
-      else {
+  User.findByIdAndUpdate( userID, {$push: {jobsApplied:jobID}}, function (err, job){
+      if(err) {
+        return next(err)
+      } else {
         console.log('got to render');
-        res.render('job_display');
+        Job.find({}, (err,jobs)=>{
+          if(err) {return next(err); }
+          res.render('job_display', { jobs });
+        });
       }
     } 
   )
