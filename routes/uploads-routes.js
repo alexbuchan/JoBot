@@ -8,9 +8,6 @@ const CV = require('../models/cv');
 const uploadResume = multer({ dest: './public/uploads/Resumes' });
 const uploadAvatar = multer({ dest: './public/uploads/Avatars' });
 
-router.get('/', (req, res, next) => {
-  res.render('uploads');
-});
 // ──────────────────────────────────────────────────────────────────────── I ──────────
 //   :::::: S A V E   RESUME   P O S T : :  :   :    :     :        :          :
 // ──────────────────────────────────────────────────────────────────────────────────
@@ -31,7 +28,7 @@ router.post('/addResume', uploadResume.single('file'), (req, res, next) => {
       User.findByIdAndUpdate(userID, {$push: { cvs: newCV._id }}, (err, file) => {
         if (err) { return next(err); }
         else {
-          res.redirect('/uploads');
+          res.redirect('/userProfile');
         }
       });
     }
@@ -54,7 +51,7 @@ router.post('/addAvatar', uploadAvatar.single('photo'), function(req, res){
       User.findByIdAndUpdate(userID, { $set: { avatar: pic._id }}, function (err, file) {
         if (err) { return next(err); } 
         else{
-          res.redirect('/uploads');
+          res.redirect('/userProfile');
         }
       });
     }

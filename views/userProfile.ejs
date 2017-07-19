@@ -8,12 +8,65 @@
   <img style="width:100px; border-radius:50%;" src="<%=user.avatar.pic_path %>" alt="Profile Pic">
 <% } %>
 
-<form action="/uploads">
-  <button type="submit" class= "btn btn-primary" >Add an avatar to your profile</button>
-</form>
-<form action="/uploads">
-  <button type="submit" class="btn btn-primary" >Add a CV/Resume to your profile</button>
-</form>
+<%/* Trigger Avatar Modal with Button */%>
+<button type="button" class="btn btn-primary avatarRegisterButton" data-toggle="modal" data-target='#addAvatarModal'>Add an Avatar to Profile</button>
+
+<%/* Avatar Modal */%>
+<div class="modal fade" id="addAvatarModal" role="dialog">
+  <div class="modal-dialog">
+  
+<%/* Avatar Modal Content*/%>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Avatar Upload</h4>
+      </div>
+      <div class="modal-body">
+        <p>Please choose Avatar file</p>
+      </div>
+      <div class="modal-footer">
+        <form id='uploadForm'
+        action='/uploads/addAvatar'
+        method='post'
+        encType="multipart/form-data">
+          <input type="file" name="photo">
+          <button class="btn btn-primary avatarRegisterButton" type="submit">Save Avatar</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<%/* Trigger Resume Modal with Button */%>
+<button type="button" class="btn btn-primary ResumeRegisterButton" data-toggle="modal" data-target='#addResumeModal'>Add a CV/Resume to your profile</button>
+
+<%/* Resume Modal */%>
+<div class="modal fade" id="addResumeModal" role="dialog">
+  <div class="modal-dialog">
+  
+<%/* Resume Modal Content*/%>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Resume Upload</h4>
+      </div>
+      <div class="modal-body">
+        <p>Please choose Resume file</p>
+      </div>
+      <div class="modal-footer">
+        <form id='uploadForm'
+        action='/uploads/addResume'
+        method='post'
+        encType="multipart/form-data">
+          <input type="file" name="file">
+          <button class="btn btn-primary ResumeRegisterButton" type="submit">Save CV/Resume</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 <% if(user.cvs.length===0) { %>
   <section>
