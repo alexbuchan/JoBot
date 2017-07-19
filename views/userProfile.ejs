@@ -1,13 +1,44 @@
 <h1>Welcome <%= currentUser.user.username %></h1>
 <h2>User Profile</h2>
-<img style="width:100px; border-radius:50%;" src="<%= user.avatar %>" alt="An image">
+<% if(!user.avatar) { %>
+  <section>
+    <img style="width:100px; border-radius:50%;" src="./images/JoBot_Profile.png" alt="Default Pic" />
+  </section>
+<% } else { %>
+  <img style="width:100px; border-radius:50%;" src="<%=user.avatar.pic_path %>" alt="Profile Pic">
+<% } %>
 
-<a href="/uploads">Add an avatar to your profile</a>
-<a href="/uploads">Add a CV/Resume to your profile</a>
+<form action="/uploads">
+  <button type="submit" class= "btn btn-primary" >Add an avatar to your profile</button>
+</form>
+<form action="/uploads">
+  <button type="submit" class="btn btn-primary" >Add a CV/Resume to your profile</button>
+</form>
+
+<% if(user.cvs.length===0) { %>
+  <section>
+   <p>You have no Resume uploaded</p>
+  </section>
+<% } else { %>
+<section>
+  <ol>
+    <% user.cvs.forEach(function(resume) { %>
+      <div class="resume-list">
+        <li>
+          Resume Name:<%= resume.resumeName %>
+          <form action="/userProfile/<%= resume._id %>/delete" method="POST">
+            <button class="resume-delete">DELETE</button>
+          </form>
+        </li>
+      </div>
+    <% })%>
+  </ol>
+</section>
+<% } %>
 
 <div class="visible">
 
-  <button id="editUserInfoButton" value="Edit Profile Details">Add Profile Details</button>
+  <button id="editUserInfoButton" class="btn btn-primary btn-block" value="Edit Profile Details">Add Profile Details</button>
 
   <form style="border:1px solid black; margin: 10px;" class="userEditForm" action="/" method="POST" id="form2">
     <h3>Edit Profile Details:</h3>

@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const cvSchema = new Schema({
-  filename: String,
-  filepath: String,
+  resumeName: String,
+  file_path: String,
+  file_name: String
+}, {
+  timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
 
 const CV = mongoose.model('CV',cvSchema);
