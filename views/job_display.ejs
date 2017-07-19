@@ -6,7 +6,7 @@
       <li>
         TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
         <form action="/job_display/<%= job._id %>" method="POST">
-        <button class="job-apply">APPLY</button>
+        <button id="applyToJob" class="job-apply">APPLY</button>
         </form>
       </li>
     </div>

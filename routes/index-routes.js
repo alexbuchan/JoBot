@@ -48,7 +48,7 @@ router.get('/userProfile', auth.checkLoggedIn('You must be logged in','/'),funct
 router.post('/userProfile/:id/delete', (req,res,next)=>{
   const resumeID = req.params.id;
   const userID = req.session.passport.user._id;
-  User.findByIdAndUpdate( userID, {$pull: {cvs:resumeID}}, function (err, job){
+  User.findByIdAndUpdate( userID, {$pull: {cvs:resumeID}},{new: true}, function (err, job){
     if(err) {
       return next(err);
     } else {
@@ -57,7 +57,8 @@ router.post('/userProfile/:id/delete', (req,res,next)=>{
       .populate('avatar')
       .exec(function(err, user) {
         if (err){ return next(err); }
-        res.render('userProfile', {user:user,layout:"layouts/test"});
+        console.log("DEBUG FOR PIC USER",user);   
+        res.redirect('/userProfile');
       });
     }
   }
@@ -70,6 +71,7 @@ router.get('/dashboard', auth.checkLoggedIn('You must be logged in', '/'), funct
   let userID = req.session.passport.user._id;
   User.findById(userID)
     .populate('jobsApplied')
+    .populate('avatar')
     .exec(function(err, user) {
       if (err){ return next(err); }
       res.render('dashboard', {user});
@@ -85,9 +87,10 @@ router.post('/dashboard/:id/delete', (req,res,next)=>{
     } else {
       User.findById(userID)
       .populate('jobsApplied')
+      .populate('avatar')
       .exec(function(err, user) {
         if (err){ return next(err); }
-        res.render('dashboard', {user:user,layout:"layouts/test"});
+        res.redirect('/dashboard');
       });
     }
   }
