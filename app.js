@@ -27,6 +27,8 @@ mongoose.connect(`mongodb://localhost:${portDB}/${databaseName}`);
 const authRoutes = require('./routes/auth-routes');
 const index = require('./routes/index-routes');
 const uploadRoutes = require('./routes/uploads-routes');
+const api = require('./routes/api');
+
 const User = require('./models/users');
 const Job = require('./models/jobs');
 const CV = require('./models/cv');
@@ -68,6 +70,7 @@ app.use(auth.setCurrentUser);
 app.use('/uploads', uploadRoutes);
 app.use('/', authRoutes);
 app.use('/', index);
+app.use('/api',api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
