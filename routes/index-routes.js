@@ -111,6 +111,12 @@ router.get('/search', auth.checkLoggedIn('You must be logged in', '/'), function
 router.get('/job_display', (req, res, next)=> {
   Job.find({}, (err,jobs)=>{
     if(err) {return next(err); }
+    jobs.forEach((job)=>{
+      console.log(job._id); // this prints out all job ids
+      //push into new array
+      //compare that array with user jobApplied
+      //then render job displayed on new array after comparison
+    });
     res.render('job_display', { jobs });
   });
 });
