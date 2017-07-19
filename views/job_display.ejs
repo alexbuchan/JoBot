@@ -1,17 +1,19 @@
 <h1>Search Results</h1>
-
- <ol>
-  <% jobs.forEach((job) => { %>
-    <div class="job-listing">
-      <li>
-        TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
-        <form action="/job_display/<%= job._id %>" method="POST">
-        <button id="applyToJob" class="job-apply">APPLY</button>
-        </form>
-      </li>
-    </div>
-  <%  }) %>
-  </ol>
+<div style="overflow: auto; height:400px;">
+  <ol>
+    <% jobs.forEach((job) => { %>
+      <div class="job-listing">
+        <li>
+          TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
+          <form action="/job_display/<%= job._id %>" method="POST">
+          <button id="applyToJob" class="job-apply">APPLY</button>
+          </form>
+        </li>
+      </div>
+    <%  }) %>
+    </ol>
+</div>
+ 
 
 <form action="/userProfile">
 	<button type="submit" class="btn btn-primary btn-block">User Profile</button>
