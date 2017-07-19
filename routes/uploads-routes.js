@@ -5,40 +5,59 @@ const User = require('../models/users');
 const multer = require('multer');
 const Picture = require('../models/picture');
 const CV = require('../models/cv');
-const upload = multer({ dest: './public/uploads/' });
+const uploadResume = multer({ dest: './public/uploads/Resumes' });
+const uploadAvatar = multer({ dest: './public/uploads/Avatars' });
 
 router.get('/', (req, res, next) => {
   res.render('uploads');
 });
-
-router.post('/', upload.single('file'), (req, res, next) => {
-  console.log('Inside the post');
+// ──────────────────────────────────────────────────────────────────────── I ──────────
+//   :::::: S A V E   RESUME   P O S T : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────────────────────
+router.post('/addResume', uploadResume.single('file'), (req, res, next) => {
   let userID = req.session.passport.user._id;
-  let fileID = req.file._id;
-  let target_path = 'uploads/' + req.file.originalname;
 
-  let newCV = new CV({
-    filename: req.file.originalname,
-    filepath: `/uploads/${req.file.filename}`,
+  newCV = new CV({
+  resumeName: req.body.Resumename,
+  file_path: `/uploads/Resumes/${req.file.filename}`,
+  file_name: req.file.originalname,
   });
-  console.log('before save');
+
   newCV.save((err, newCV) => {
     if (err) {
-      console.log('There has been an error.');
       return next(err);
     }
     else {
-      console.log('CV!', newCV);
-      console.log("This is the file:", req.file);
       User.findByIdAndUpdate(userID, {$push: { cvs: newCV._id }}, (err, file) => {
         if (err) { return next(err); }
         else {
-          console.log('file was added to', req.session.passport.user.username);
-          res.render('uploads');
+          res.redirect('/uploads');
         }
       });
     }
   });
 });
+// ────────────────────────────────────────────────────────────────── II ──────────
+//   :::::: U P L O A D   A V A T A R : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────────────
+router.post('/addAvatar', uploadAvatar.single('photo'), function(req, res){
+  var userID = req.session.passport.user._id;
 
+  let pic = new Picture({
+    picName: req.body.Avatarname,
+    pic_path: `./uploads/Avatars/${req.file.filename}`,
+    pic_name: req.file.originalname
+  });
+  pic.save((err,pic) => {
+    if(err){res.redirect('/'); }
+    else {
+      User.findByIdAndUpdate(userID, { $set: { avatar: pic._id }}, function (err, file) {
+        if (err) { return next(err); } 
+        else{
+          res.redirect('/uploads');
+        }
+      });
+    }
+  });
+});
 module.exports = router;

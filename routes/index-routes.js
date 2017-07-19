@@ -9,8 +9,9 @@ const Job = require('../models/jobs');
 const multer = require('multer');
 const Picture = require('../models/picture');
 const upload = multer({ dest: './public/uploads/' });
+const uploadResume = multer({ dest: './public/uploads/Resumes' });
+const CV = require('../models/cv');
 
-//
 // ────────────────────────────────────────────────────────── I ──────────
 //   :::::: H O M E   P A G E : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────
@@ -18,7 +19,11 @@ const upload = multer({ dest: './public/uploads/' });
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'JoBot' });
 });
-
+//
+// ──────────────────────────────────────────────────────────────────────────────── II ──────────
+//   :::::: L O G I N   A U T H E N T I C A T I O N : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────────────────────────────
+//
 router.post("/", passport.authenticate("local", {
   successRedirect: "/userProfile",
   failureRedirect: "/",
@@ -26,53 +31,37 @@ router.post("/", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
-//
-// ────────────────────────────────────────────────────────────────── II ──────────
-//   :::::: U P L O A D   A V A T A R : :  :   :    :     :        :          :
-// ────────────────────────────────────────────────────────────────────────────
-//
-
-router.post('/userProfile', upload.single('photo'), function(req, res){
-  var userID = req.session.passport.user._id;
-
-  let pic = new Picture({
-    name: req.body.name,
-    pic_path: `./uploads/${req.file.filename}`,
-    pic_name: req.file.originalname
-  });
-  console.log("picture",pic);
-  pic.save((err,pic) => {
-    if(err){res.redirect('/'); }
-    else {
-      User.findByIdAndUpdate(userID, { $set: { avatar: pic.pic_path }}, function (err, user) {
-        console.log('in function before error');
-        if (err) { return next(err); } else{
-          console.log('after error in function');
-          res.render('userProfile', {user});
-          // res.redirect('/userProfile')
-          console.log('what the hell');
-        }
-      });
-    }
-  });
-  console.log('before update');
-});
-
-router.get('/', function(req, res, next) {
-  Picture.find((err, pic) => {
-    res.render('index', {pic});
-  });
-});
-
-//
 // ──────────────────────────────────────────────────────────────── III ──────────
 //   :::::: U S E R   P R O F I L E : :  :   :    :     :        :          :
 // ──────────────────────────────────────────────────────────────────────────
-//
+router.get('/userProfile', auth.checkLoggedIn('You must be logged in','/'),function(req,res,next){
+  let userID = req.session.passport.user._id;
+  User.findById(userID)
+  .populate('cvs')
+  .populate('avatar')
+  .exec(function(err,user){
+    if(err) {return next(err);}
+    res.render('userProfile',{user});
+  });
+});
 
-router.get('/userProfile', auth.checkLoggedIn('You must be logged in', '/'), function(req, res, next) {
-  console.log("userProfile",JSON.stringify(req.user));
-  res.render('userProfile', { user: JSON.stringify(req.user) });
+router.post('/userProfile/:id/delete', (req,res,next)=>{
+  const resumeID = req.params.id;
+  const userID = req.session.passport.user._id;
+  User.findByIdAndUpdate( userID, {$pull: {cvs:resumeID}}, function (err, job){
+    if(err) {
+      return next(err);
+    } else {
+      User.findById(userID)
+      .populate('cvs')
+      .populate('avatar')
+      .exec(function(err, user) {
+        if (err){ return next(err); }
+        res.render('userProfile', {user:user,layout:"layouts/test"});
+      });
+    }
+  }
+);
 });
 // ────────────────────────────────────────────────────────── IV ──────────
 //   :::::: D A S H B O A R D : :  :   :    :     :        :          :
@@ -104,7 +93,6 @@ router.post('/dashboard/:id/delete', (req,res,next)=>{
   }
 );
 });
-
 // ──────────────────────────────────────────────────── V ──────────
 //   :::::: S E A R C H : :  :   :    :     :        :          :
 // ──────────────────────────────────────────────────────────────

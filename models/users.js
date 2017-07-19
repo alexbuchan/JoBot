@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  avatar: String,
   firstName: String,
   lastName: String,
   age: Number,
@@ -23,6 +22,7 @@ const userSchema = new Schema({
   googleID: String,
   jobsApplied: [{type: Schema.Types.ObjectId, ref: 'Job'}],
   cvs: [{type: Schema.Types.ObjectId, ref: 'CV'}],
+  avatar: {type: Schema.Types.ObjectId, ref: 'Picture'},
   }, {
   timestamps: {
     createdAt: "created_at",
