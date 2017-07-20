@@ -57,7 +57,7 @@ router.post('/userProfile/:id/delete', (req,res,next)=>{
       .populate('avatar')
       .exec(function(err, user) {
         if (err){ return next(err); }
-        console.log("DEBUG FOR PIC USER",user);   
+        console.log("DEBUG FOR PIC USER",user);
         res.redirect('/userProfile');
       });
     }
@@ -104,6 +104,20 @@ router.get('/search', auth.checkLoggedIn('You must be logged in', '/'), function
   res.render('search', { user: JSON.stringify(req.user) });
 });
 
+router.post('/search', (req, res, next) => {
+  let userSearchQuery = req.body.userSearchQuery.split(' ');
+  console.log("userSearchQueryArray", userSearchQuery);
+  let result = userSearchQuery.join(' ');
+  console.log('SEAEAARRRCH ME BEAUTIES!!!! SEARCH!!!!');
+  // db.jobs.find({$text: {"$search": " \" Madrid \" \" Uber \" "}}).pretty()
+  // db.jobs.find({$text: {"$search": "\"Madrid\"\"Uber\""}}).pretty()
+  Job.find({$text: {$search: result}}, (err, result) => {
+    console.log("result", result);
+    req.session.success = result; //Save data
+    res.redirect('/job_display');
+  });
+});
+
 // ────────────────────────────────────────────────────────────── VI ──────────
 //   :::::: J O B   D I S P L A Y : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────────
@@ -111,15 +125,14 @@ router.get('/search', auth.checkLoggedIn('You must be logged in', '/'), function
 router.get('/job_display', auth.checkLoggedIn('You must be logged in', '/'), (req, res, next)=> {
   const userID = req.session.passport.user._id;
   const user = req.session.passport.user;
+  const jobsApplied = user.jobsApplied;
+  const jobs = req.session.success;
 
   User.findById(userID)
   .exec(function(err,user){
     if(err){return next(err);}
-    Job.find({},(err,jobs)=>{
-      if(err) {return next(err); }
       let userArray = user.jobsApplied;
-      res.render('job_display', { jobs,userArray,user });
-    });
+      res.render('job_display', { jobs, userArray, user });
   });
 });
 
@@ -127,14 +140,15 @@ router.post('/job_display/:id', (req,res,next)=>{
   const jobID = req.params.id;
   const userID = req.session.passport.user._id;
 
-      User.findByIdAndUpdate( userID, {$push: {jobsApplied:jobID}}, function (err, job){
-        if(err) {
-          return next(err);
-        }
-        else {
-            res.redirect('/job_display');
-        }
-      });
+  User.findByIdAndUpdate( userID, {$push: {jobsApplied:jobID}}, function (err, job){
+    if(err) {
+      return next(err);
+    }
+    else {
+        res.redirect('/job_display');
+    }
+  });
 });
+
 
 module.exports = router;
