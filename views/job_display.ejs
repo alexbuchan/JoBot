@@ -1,13 +1,18 @@
 <h1>Search Results</h1>
+<p><%= jobsApplied %></p>
+
 <div style="overflow: auto; height:400px;">
   <ol>
     <% jobs.forEach((job) => { %>
+      <% let newJob = job._id.toString(); %>
       <div class="job-listing">
         <li>
           TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
+          <% if(!jobsApplied.includes(newJob)) { %>
           <form action="/job_display/<%= job._id %>" method="POST">
           <button id="applyToJob" class="job-apply">APPLY</button>
           </form>
+         <% } %>
         </li>
       </div>
     <%  }) %>
