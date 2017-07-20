@@ -14,5 +14,7 @@ const jobSchema = new Schema({
   description: String
 });
 
+jobSchema.index({"$**": "text"});
+
 const Job = mongoose.model('Job',jobSchema);
 module.exports = Job;

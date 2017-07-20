@@ -105,13 +105,12 @@ router.get('/search', auth.checkLoggedIn('You must be logged in', '/'), function
 });
 
 router.post('/search', (req, res, next) => {
-  let userSearchQuery = req.body.userSearchQuery.split(' ');
-  console.log("userSearchQueryArray", userSearchQuery);
-  let result = userSearchQuery.join(' ');
+  let userSearchQuery = req.body.userSearchQuery;
+  console.log("userSearchQuery", req.body.userSearchQuery);
   console.log('SEAEAARRRCH ME BEAUTIES!!!! SEARCH!!!!');
   // db.jobs.find({$text: {"$search": " \" Madrid \" \" Uber \" "}}).pretty()
   // db.jobs.find({$text: {"$search": "\"Madrid\"\"Uber\""}}).pretty()
-  Job.find({$text: {$search: result}}, (err, result) => {
+  Job.find({$text: {$search: req.body.userSearchQuery}}, (err, result) => {
     console.log("result", result);
     req.session.success = result; //Save data
     res.redirect('/job_display');
