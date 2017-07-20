@@ -108,42 +108,33 @@ router.get('/search', auth.checkLoggedIn('You must be logged in', '/'), function
 //   :::::: J O B   D I S P L A Y : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────────
 
-router.get('/job_display', (req, res, next)=> {
+router.get('/job_display', auth.checkLoggedIn('You must be logged in', '/'), (req, res, next)=> {
   const userID = req.session.passport.user._id;
   const user = req.session.passport.user;
 
-  Job.find({},(err,jobs)=>{
-    if(err) {return next(err); }
-      console.log(user.jobsApplied);
-    res.render('job_display', { jobs:jobs,jobsApplied:user.jobsApplied,user:user });
+  User.findById(userID)
+  .exec(function(err,user){
+    if(err){return next(err);}
+    Job.find({},(err,jobs)=>{
+      if(err) {return next(err); }
+      let userArray = user.jobsApplied;
+      res.render('job_display', { jobs,userArray,user });
+    });
   });
 });
 
 router.post('/job_display/:id', (req,res,next)=>{
   const jobID = req.params.id;
   const userID = req.session.passport.user._id;
-  console.log("ENTER JOB POST",jobID,userID);
-  console.log("type id:", typeof jobID);
-  User.findOne({jobsApplied: {$elemMatch: {$eq: "596c665de631a706615990e9"}}}, (err, result) => {
-    console.log("INSIDE TRUE IF. RESULT:", result);
-    if (!result) {
+
       User.findByIdAndUpdate( userID, {$push: {jobsApplied:jobID}}, function (err, job){
         if(err) {
           return next(err);
         }
         else {
-          console.log('got to render');
-          Job.find({}, (err,jobs)=>{
-            if(err) {return next(err); }
-            res.render('job_display',{ jobs });
-          });
+            res.redirect('/job_display');
         }
       });
-    }
-    else {
-      console.log('Oh Master Luke, there has been a terrible mistake!');
-    }
-  });
 });
 
 module.exports = router;
