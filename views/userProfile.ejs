@@ -81,61 +81,80 @@
 </section>
 <% } %>
 
+<div class="user-information">
+  <p>Occupation: <%= user.occupation %></p>
+  <p>User Name: <%= user.username %></p>
+  <p>First Name: <%= user.firstName %></p>
+  <p>Last Name: <%= user.lastName %></p>
+  <p>Age: <%= user.age %></p>
+  <p>Email: <%= user.email %></p>
+  <p>Phone: <%=user.phone %></p>
+  <p>Street Number: <%= user.number%></p>
+  <p>Street: <%= user.street %></p>
+  <p>City: <%= user.city %></p>
+  <p>Country: <%= user.Country %></p>
+  <p>Zip: <%= user.zip %></p>
+</div>
 
+<%/* Trigger Edit Profile Modal with Button */%>
+<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target='#EditProfile'>Edit Profile</button>
 
-<div class="visible">
+<%/* Edit Profile Modal */%>
+<div class="modal fade" id="EditProfile" role="dialog">
+<div class="modal-dialog">
 
-  <button id="editUserInfoButton" class="btn btn-primary btn-block" value="Edit Profile Details">Add Profile Details</button>
+<%/* Edit Profile Modal Content*/ %>
+<div class="modal-content">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Edit Profile</h4>
+</div>
+    <div class="modal-body" style="overflow: auto;height:400px;">
+      <form id='ProfileForm' action='/userProfile' method='POST'>
+      <h3>Edit Profile Details:</h3>
 
-  <form style="border:1px solid black; margin: 10px;" class="userEditForm" action="/" method="POST" id="form2">
-    <h3>Edit Profile Details:</h3>
-    <p><label for="username">Username</label>
-    <input type="text" name="username" placeholder="<%= currentUser.user.username %>"></p>
+      <label>Occupation</label>
+      <input type="text" class="form-control" name="occupation" placeholder="Occupation" value="<%= user.occupation %>">
 
-    <p><label for="password">Password</label>
-    <input id="signupStrength" type="password" name="password" placeholder="<%= currentUser.user.password %>"></p>
+      <label>First Name</label>
+      <input type="text" class="form-control" name="firstName" placeholder="First Name" value="<%= user.firstName %>">
 
-    <div class="username">
-      <label for="firstName">firstName</label>
-      <input type="text" name="firstName" placeholder="<%= 'first name' || currentUser.user.firstName %>">
+      <label>Last Name</label>
+      <input type="text" class="form-control" name="lastName" placeholder="Last Name" value="<%= user.lastName %>">
 
-      <label for="lastName">lastName</label>
-      <input type="text" name="lastName" placeholder="lastName">
+      <label>Age</label>
+      <input type="text" class="form-control" name="age" placeholder="Age" value="<%= user.age %>">
+
+      <label>Email</label>
+      <input type="text" class="form-control" name="email" placeholder="Email" value="<%= user.email %>">
+
+      <label>Phone</label>
+      <input type="text" class="form-control" name="phone" placeholder="Phone Number" value="<%= user.phone %>">
+
+      <h3>Address</h3>
+      <label>Street Number</label>
+      <input type="text" class="form-control" name="streenumber" placeholder="Street Number" value="<%= user.number %>">
+
+      <label>Street</label>
+      <input type="text" class="form-control" name="street" placeholder="Street" value="<%= user.street %>">
+
+      <label>City</label>
+      <input type="text" class="form-control" name="city" placeholder="City" value="<%= user.city %>">
+
+      <label>Country</label>
+      <input type="text" class="form-control" name="country" placeholder="Country" value="<%= user.Country %>">
+
+      <label>Zip</label>
+      <input type="text" class="form-control" name="zip" placeholder="Zip" value="<%= user.zip %>">
+
     </div>
-
-    <p><label for="age">age</label>
-    <input type="text" name="age" placeholder="age"></p>
-
-    <label for="email">email</label>
-    <input type="email" name="email" placeholder="email">
-
-    <label for="phone_number">phone number</label>
-    <input type="text" name="phone_number" placeholder="phone number">
-
-    <p><label for="occupation">occupation</label>
-    <input type="text" name="occupation" placeholder="occupation"></p>
-
-
-    <div class="address">
-      <h4>Address</h4>
-      <label for="street">street</label>
-      <input type="text" name="street" placeholder="street">
-
-      <label for="number">number</label>
-      <input type="text" name="number" placeholder="number">
-
-      <p><label for="city">city</label>
-      <input type="text" name="city" placeholder="city"></p>
-
-      <p><label for="country">country</label>
-      <input type="text" name="country" placeholder="country"></p>
-
-      <p><label for="zip_code">zip code</label>
-      <input type="text" name="zip_code" placeholder="zip code"></p>
+    <div class="modal-footer">
+        <button class="btn btn-primary saveprofile" type="submit">Save</button>
+      </form>
     </div>
-
-    <button type="submit" class="btn btn-primary userEditFormButton">Save Profile Info</button>
-</form>
+</div>
+</div>
+</div>
 
 <form action="/dashboard">
 	<button type="submit" class="btn btn-primary btn-block">Dashboard</button>

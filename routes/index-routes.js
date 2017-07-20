@@ -39,6 +39,7 @@ router.get('/userProfile', auth.checkLoggedIn('You must be logged in','/'),funct
   User.findById(userID)
   .populate('cvs')
   .populate('avatar')
+  .populate('jobsApplied')
   .exec(function(err,user){
     if(err) {return next(err);}
     res.render('userProfile',{user});
@@ -57,12 +58,34 @@ router.post('/userProfile/:id/delete', (req,res,next)=>{
       .populate('avatar')
       .exec(function(err, user) {
         if (err){ return next(err); }
-        console.log("DEBUG FOR PIC USER",user);
         res.redirect('/userProfile');
-      });
+        });
+      }
     }
-  }
-);
+  );
+});
+
+router.post('/userProfile', (req,res,next)=>{
+  const userID = req.session.passport.user._id;
+
+  const updateProfile = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    age: req.body.age,
+    email: req.body.email,
+    occupation: req.body.occupation,
+    phone: req.body.phone,
+    street: req.body.street,
+    number: req.body.streetnumber,
+    city: req.body.city,
+    Country: req.body.country,
+    zip: req.body.zip
+  };
+
+  User.findByIdAndUpdate(userID, updateProfile, (err,user)=>{
+    if(err){return next(err);}
+    res.redirect('/userProfile');
+  });
 });
 // ────────────────────────────────────────────────────────── IV ──────────
 //   :::::: D A S H B O A R D : :  :   :    :     :        :          :
