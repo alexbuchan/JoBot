@@ -24,7 +24,7 @@
           <div class="job-listing">
             <li>
               TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
-              <% if(!userArray.includes(newJob)) { %>
+              <% if(userArray.indexOf(newJob)<0) { %>
                 <p>WE ARE IN IF</p>
                 <p><%= typeof newJob %></p>
                 <p><%= !userArray.includes(newJob) %></p>
