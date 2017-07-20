@@ -7,13 +7,13 @@ const userSchema = new Schema({
   password: String,
   firstName: String,
   lastName: String,
-  age: Number,
+  age: String,
   email: String,
   occupation: String,
   phone: String,
   address: {
     street: String,
-    number: Number,
+    number: String,
     city: String,
     Country: String,
     zip: String
