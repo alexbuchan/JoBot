@@ -1,6 +1,4 @@
 <h1>Search Results</h1>
-<p><%= userArray %></p>
-<p><%= Array.isArray(userArray) %></p>
 
 <div style="overflow: auto; height:400px;">
     <% if(userArray.length===0) { %>
@@ -10,29 +8,28 @@
             <li>
               TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
               <form action="/job_display/<%= job._id %>" method="POST">
-              <button id="applyToJob" class="job-apply">APPLY</button>
+              <button id="applyToJob" class="btn btn-primary active job-apply">APPLY</button>
               </form>
              <%  }); %>
             </li>
           </div>
       </ol>
     <% } else { %>
-      <p>WE ARE IN ELSE</p>
       <ol>
         <% jobs.forEach((job) => { %>
           <% let newJob = job._id.toString(); %>
           <div class="job-listing">
             <li>
               TITLE:<%= job.title %> - COMPANY:<%= job.company %> - CITY:<%= job.city %> - REQUIREMENTS:<%= job.requirements %>
-              <% if(userArray.indexOf(newJob)<0) { %>
-                <p>WE ARE IN IF</p>
-                <p><%= typeof newJob %></p>
-                <p><%= !userArray.includes(newJob) %></p>
+            <% if(userArray.indexOf(newJob)<0) { %>
               <form action="/job_display/<%= job._id %>" method="POST">
-              <button id="applyToJob" class="job-apply">APPLY</button>
+              <button id="applyToJob" class="btn btn-primary active job-apply">APPLY</button>
               </form>
-             <% } %>
-             <p>OUTSIDE IF</p>
+            <% }else { %>
+              <form action="/job_display/<%= job._id %>" method="POST">
+              <button id="applyToJob" class="btn btn-primary disabled job-applied">APPLIED</button>
+               </form>
+            <%  } %>
             </li>
           </div>
         <%  }); %>
