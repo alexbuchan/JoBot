@@ -1,3 +1,10 @@
+<div class="profile-page-links">
+  <div class="profile-link">
+    <a class="link" href="/dashboard">Dashboard</a>
+    <a class="link" href="/search">Search</a>
+  </div>
+</div>
+
 <h1>Welcome <%= currentUser.user.username.replace(/\b\w/g, l => l.toUpperCase()) %></h1>
 <h2>User Profile</h2>
 <% if(!user.avatar) { %>
@@ -59,6 +66,9 @@
     </div>
 </div>
 </div>
+
+
+
 
 <% if(user.cvs.length===0) { %>
   <section>
@@ -155,13 +165,3 @@
 </div>
 </div>
 </div>
-
-<form action="/dashboard">
-	<button type="submit" class="btn btn-primary btn-block">Dashboard</button>
-</form>
-<form action="/search">
-	<button type="submit" class="btn btn-primary btn-block">Search</button>
-</form>
-<form action="/logout">
-	<button type="submit" class="btn btn-primary btn-block">Logout</button>
-</form>
