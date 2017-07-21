@@ -1,8 +1,10 @@
 /*jshint esversion: 6*/
 const mongoose = require('mongoose');
 const portDB = require('../config').portDB;
-const databaseName = require('../config').databaseName;
-mongoose.connect(`mongodb://localhost:${portDB}/${databaseName}`);
+// const databaseName = require('../config').databaseName;
+// mongoose.connect(`mongodb://localhost:${portDB}/${databaseName}`);
+const dotenv = require('dotenv').config();
+mongoose.connect(process.env.MONGODB_URI);
 const Job = require('../models/jobs');
 
 const jobs = [
@@ -138,422 +140,70 @@ const jobs = [
     description: "Our technical team needs you to deal with performance issues / real time and big amount of data. In figures: 2 to 3 production launch per week, 150 000 requests per second, 250 000 tracking…"
   },
   {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
+    title: "UI/UX Designer in London",
+    company: "Trouva",
+    salary: "Undisclosed",
+    city: "London",
+    country: "England",
+    duration: "Contract",
+    languages: "French",
+    requirements: "UI/UX, Sketch,JQuery,HTML,CSS",
+    description: "We are looking for a UI/UX enginer that is awesome!"
   },
   {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
+    title: "Front End Developer - Javascript, CSS, HTML (Market Rate Salary plus share options) in London",
+    company: "Logical Glue",
+    salary: "Undisclosed",
+    city: "London",
+    country: "England",
     duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
+    languages: "French",
+    requirements: "React,javascript,HTML, Ember,CSS,Angular",
+    description: "We are a fast-growing business within the cutting edge world of Big Data. Companies are increasingly making data driven decisions. Our goal at Logical Glue is to put machine learning directly into the hands of business experts and analysts, not just data scientists, so they can rapidly extract and operationalize highly accurate and actionable insights from their data. Due to growth, we're now looking for an exceptional Front-End Developer with demonstrable experience in Javascript, HTML and CSS to join us."
   },
   {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
+    title: "Senior Back End Python (Django) Developer in London",
+    company: "Festicket",
+    salary: "50,000",
+    city: "London",
+    country: "England",
     duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
+    languages: "multi",
+    requirements: "Python,Postgre, Continuous Integration, APIs",
+    description: "Festicket is transforming the way music fans discover and book tickets and travel packages for festivals around the world. Our platform revolutionises the music festival industry by offering an end-to-end experience for music travellers through an efficient two-sided marketplace for 700+ music festivals across 45 different countries! In four short years, we have become Europe's largest music festival platform. 🚀"
   },
   {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
+    title: "Junior Operations Analyst – Middle Office in Amsterdam",
+    company: "Safend",
+    salary: "30,000",
+    city: "Amsterdam",
+    country: "Netherlands",
     duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
+    languages: "English,Dutch",
+    requirements: "MS Office, English, Analytical",
+    description: "Come analyze stuff to analyze how you analyze things"
   },
   {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
+    title: "Senior Mobile Developer (Android) ",
+    company: "Bunq",
+    salary: "100,000",
+    city: "Amsterdam",
+    country: "Netherlands",
     duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
+    languages: "English",
+    requirements: "UX/UI,LAMP,Java,Android",
+    description: "As our Senior Android Developer you will work with the absolute best. You get freedom and responsibility, so we expect a lot. Working in an outstanding startup culture and the chance of doing something truly disruptive are the greatest perks of the job. Do you want to be part of a game-changing initiative? This is your chance."
   },
   {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
-  },
-  {
-    title: "Junior Full Stack Developer",
-    company: "Start Ups",
-    salary: "",
-    city: "Barcelona",
-    country: "Barcelona",
-    duration: "full-time",
-    languages: "Spanish is a must",
-    requirements: "A la banda salarial hay que añadirle beneficios adicionales El Talento ha de dominar lenguaje Backend y Frontend (C++, C#, Java, PHP, Html5, JavaScript, CSS, etc.",
-    description: "Estamos buscando a un desarrollador/a que haya llevado a cabo un proyecto en su totalidad (Frontend, Backend, Server site) para participar en diversos proyectos que tiene la compañía en march"
+    title: "Country Manager at Bookabus",
+    company: "Bookabus",
+    salary: "15,000",
+    city: "Amsterdam",
+    country: "Netherlands",
+    duration: "part-time",
+    languages: "multi",
+    requirements: "People Skills",
+    description: "We book your bus so you don't have to bust your ass finding one"
   }
 ];
 
