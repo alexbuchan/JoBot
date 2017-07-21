@@ -1,46 +1,35 @@
 <h1>DashBoard of <%= currentUser.user.username %></h1>
 
-<% if(!user.avatar) { %>
-  <section>
-    <img style="width:100px; border-radius:50%;" src="./images/JoBot_Profile.png" alt="Default Pic" />
-  </section>
-<% } else { %>
-  <img style="width:100px; border-radius:50%;" src="<%=user.avatar.pic_path %>" alt="Profile Pic">
-<% } %>
-
+<form action="/logout">
+	<button type="submit" class="btn btn-custom logout">Logout</button>
+</form>
+<form action="/search">
+	<button type="submit" class="btn btn-custom searchbutton">Search</button>
+</form>
+<form action="/userProfile">
+	<button type="submit" class="btn btn-custom userprofile">User Profile</button>
+</form>
 <h2>JOBS APPLIED LIST:</h2>
 <% if(!user.jobsApplied) { %>
   <p>Number of Jobs: 0</p>
 <% } else { %>
   <p>Number of Jobs: <%= user.jobsApplied.length %>		</p>
+  <div class="job-listing-container">
   <ol>
     <% user.jobsApplied.forEach((job) => { %>
       <div class="job-listing">
         <li>
-          TITLE:<%= job.title %> COMPANY:<%= job.company %> SALARY: $<%= job.salary %> 
+          <p class="jobtitle">TITLE:<%= job.title %><p>
+          <p class="jobcompany">COMPANY:<%= job.company %></p>
+          <p class="jobsalary"> SALARY: $<%= job.salary %></p>
+          <p class="jobdescription"> DESCRIPTION: $<%= job.description%></p>
           <form action="/dashboard/<%= job._id %>/delete" method="POST">
-            <button class="job-delete">DELETE</button>
+            <button class="btn btn-custom deletejob">DELETE</button>
           </form>
         </li>
       </div>
     <%  }) %>
   </ol>
+</div>
   <% } %>
 
-<form action="/userProfile">
-	<button type="submit" class="btn btn-primary btn-block">User Profile</button>
-</form>
-<form action="/search">
-	<button type="submit" class="btn btn-primary btn-block">Search</button>
-</form>
-<form action="/logout">
-	<button type="submit" class="btn btn-primary btn-block">Logout</button>
-</form>
-
-<pre><code>
-  <ol>
-    <% user.jobsApplied.forEach((job) => { %>
-      <li><%= job._id %></li>
-    <%  }) %>
-   </ol>
-</code></pre>
