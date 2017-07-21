@@ -1,4 +1,4 @@
-<h1>Welcome <%= currentUser.user.username %></h1>
+<h1>Welcome <%= currentUser.user.username.replace(/\b\w/g, l => l.toUpperCase()) %></h1>
 <h2>User Profile</h2>
 <% if(!user.avatar) { %>
   <section>
@@ -14,7 +14,7 @@
 <%/* Avatar Modal */%>
 <div class="modal fade" id="addAvatarModal" role="dialog">
 <div class="modal-dialog">
-  
+
 <%/* Avatar Modal Content*/ %>
 <div class="modal-content">
 <div class="modal-header">
@@ -40,7 +40,7 @@
 <%/* Resume Modal */%>
 <div class="modal fade" id="addResumeModal" role="dialog">
 <div class="modal-dialog">
-  
+
 <%/* Resume Modal Content*/%>
 <div class="modal-content">
 <div class="modal-header">
