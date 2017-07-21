@@ -21,12 +21,11 @@
         <% if (isUserLoggedIn) { %>
             <!-- <p class="navbar-text"></p> -->
           <li><a href="/userProfile">Signed in as <%= currentUser.user.username %></a></li>
-          <li><a href="/">About</a></li>
-          <li><a href="/">Contact</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/search">Search</a></li>
           <li><a href="/logout">Logout</a></li>
         <% } else { %>
           <li><a href="/signup">Signup</a></li>
-          <li><a href="/userProfile">Profile</a></li>
           <li><a href="/">About</a></li>
           <li><a href="/">Contact</a></li>
         <% } %>

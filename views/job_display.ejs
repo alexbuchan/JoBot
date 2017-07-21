@@ -1,4 +1,11 @@
-<h1>Search Results</h1>
+<div class="profile-page-links">
+  <div class="profile-link">
+    <a class="link" href="/userProfile">User Profile</a>
+    <a class="link" href="/dashboard">Dashboard</a>
+    <a class="link" href="/search">Search</a>
+  </div>
+</div>
+<h1>Search Results:</h1>
 
 <div style="overflow: auto; height:400px;">
     <% if(userArray.length===0) { %>
@@ -36,17 +43,3 @@
       </ol>
     <% } %>
   </div>
- 
-
-<form action="/userProfile">
-	<button type="submit" class="btn btn-primary btn-block">User Profile</button>
-</form>
-<form action="/dashboard">
-	<button type="submit" class="btn btn-primary btn-block">Dashboard</button>
-</form>
-<form action="/search">
-	<button type="submit" class="btn btn-primary btn-block">Search</button>
-</form>
-<form action="/logout">
-	<button type="submit" class="btn btn-primary btn-block">Logout</button>
-</form>

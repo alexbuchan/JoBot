@@ -2,6 +2,7 @@
   <div class="profile-link">
     <a class="link" href="/dashboard">Dashboard</a>
     <a class="link" href="/search">Search</a>
+    <a class="link" data-toggle="modal" data-target='#EditProfile'>Edit Profile</a>
   </div>
 </div>
 
@@ -9,14 +10,14 @@
 <h2>User Profile</h2>
 <% if(!user.avatar) { %>
   <section>
-    <img style="width:100px; border-radius:50%;" src="./images/JoBot_Profile.png" alt="Default Pic" />
+    <img style="width:200px;height:200px; border-radius:50%;" src="./images/JoBot_Profile.png" alt="Default Pic" />
   </section>
 <% } else { %>
-  <img style="width:100px; border-radius:50%;" src="<%=user.avatar.pic_path %>" alt="Profile Pic">
+  <img style="width:200px;height:200px; border-radius:50%;" src="<%=user.avatar.pic_path %>" alt="Profile Pic">
 <% } %>
 
 <%/* Trigger Avatar Modal with Button */%>
-<button type="button" class="btn btn-primary avatarRegisterButton" data-toggle="modal" data-target='#addAvatarModal'>Add an Avatar to Profile</button>
+<button type="button" class="btn btn-custom avatarRegisterButton" data-toggle="modal" data-target='#addAvatarModal'>Add an Avatar to Profile</button>
 
 <%/* Avatar Modal */%>
 <div class="modal fade" id="addAvatarModal" role="dialog">
@@ -34,7 +35,7 @@
    <div class="modal-footer">
       <form id='uploadForm' action='/uploads/addAvatar'method='post'encType="multipart/form-data">
         <input type="file" name="photo">
-        <button class="btn btn-primary avatarRegisterButton" type="submit">Save Avatar</button>
+        <button class="btn btn-custom avatarRegisterButton" type="submit">Save Avatar</button>
        </form>
     </div>
 </div>
@@ -42,7 +43,7 @@
 </div>
 
 <%/* Trigger Resume Modal with Button */%>
-<button type="button" class="btn btn-primary ResumeRegisterButton" data-toggle="modal" data-target='#addResumeModal'>Add a CV/Resume to your profile</button>
+<button type="button" class="btn btn-custom ResumeRegisterButton" data-toggle="modal" data-target='#addResumeModal'>Add a CV/Resume to your profile</button>
 
 <%/* Resume Modal */%>
 <div class="modal fade" id="addResumeModal" role="dialog">
@@ -60,15 +61,12 @@
   <div class="modal-footer">
     <form id='uploadForm' action='/uploads/addResume'method='post'encType="multipart/form-data">
         <input type="file" name="file">
-        <button class="btn btn-primary ResumeRegisterButton" type="submit">Save CV/Resume</button>
+        <button class="btn btn-custom ResumeRegisterButton" type="submit">Save CV/Resume</button>
     </form>
    </div>
     </div>
 </div>
 </div>
-
-
-
 
 <% if(user.cvs.length===0) { %>
   <section>
@@ -91,24 +89,22 @@
 </section>
 <% } %>
 
-<div class="user-information">
-  <p>Occupation: <%= user.occupation %></p>
-  <p>User Name: <%= user.username %></p>
-  <p>First Name: <%= user.firstName %></p>
-  <p>Last Name: <%= user.lastName %></p>
-  <p>Age: <%= user.age %></p>
-  <p>Email: <%= user.email %></p>
-  <p>Phone: <%=user.phone %></p>
-  <p>Street Number: <%= user.address.number%></p>
-  <p>Street: <%= user.address.street %></p>
-  <p>City: <%= user.address.city %></p>
-  <p>Country: <%= user.address.Country %></p>
-  <p>Zip: <%= user.address.zip %></p>
+<div class="form-group">
+  <p class="form-control">Occupation: <%= user.occupation %></p>
+  <p class="form-control">User Name: <%= user.username %></p>
+  <p class="form-control">First Name: <%= user.firstName %></p>
+  <p class="form-control">Last Name: <%= user.lastName %></p>
+  <p class="form-control">Age: <%= user.age %></p>
+  <p class="form-control">Email: <%= user.email %></p>
+  <p class="form-control">Phone: <%=user.phone %></p>
+  <p class="form-control">Street Number: <%= user.address.number%></p>
+  <p class="form-control">Street: <%= user.address.street %></p>
+  <p class="form-control">City: <%= user.address.city %></p>
+  <p class="form-control">Country: <%= user.address.Country %></p>
+  <p class="form-control">Zip: <%= user.address.zip %></p>
 </div>
 
 <%/* Trigger Edit Profile Modal with Button */%>
-<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target='#EditProfile'>Edit Profile</button>
-
 <%/* Edit Profile Modal */%>
 <div class="modal fade" id="EditProfile" role="dialog">
 <div class="modal-dialog">

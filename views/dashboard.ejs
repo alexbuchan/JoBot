@@ -1,14 +1,11 @@
 <h1>DashBoard of <%= currentUser.user.username %></h1>
 
-<form action="/logout">
-	<button type="submit" class="btn btn-custom logout">Logout</button>
-</form>
-<form action="/search">
-	<button type="submit" class="btn btn-custom searchbutton">Search</button>
-</form>
-<form action="/userProfile">
-	<button type="submit" class="btn btn-custom userprofile">User Profile</button>
-</form>
+<div class="profile-page-links">
+  <div class="profile-link">
+    <a class="dashboardlink" href="/userProfile">User Profile</a>
+    <a class="dashboardlink" href="/search">Search</a>
+  </div>
+</div>
 <h2>JOBS APPLIED LIST:</h2>
 <% if(!user.jobsApplied) { %>
   <p>Number of Jobs: 0</p>
