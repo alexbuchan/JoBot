@@ -1,25 +1,45 @@
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<section class="landing-pic">
+  <header class="landing-header">
+    <h1 class="landing-text">Tired of looking for a job? Don't worry, we'll do that for you</h1>
 
-<img class="home-pic" src="images/JoBot.png" alt="JoBot picture">
-<form action="/" method="POST" id="form">
+  <div class="login-fields">
+    <form action="/" method="POST" id="form">
+      
+        <input type="text" name="username" placeholder="Username" required>
+    
+        <input type="password" name="password" placeholder="Password" required>
+      
+        <% if (typeof errorMessage !== "undefined") { %>
+          <div class="error-message"><%= message %></div>
+        <% } %>
+      
+        <button type="submit" class="btn btn-custom">Login</button>
+    </form>
+  </div>
+        <!-- <form action="/auth/facebook">
+          <button type="submit" class="fa fa-facebook"></button>
+        </form>
 
-  <label for="username">Username</label>
-  <input type="text" name="username" placeholder="JoBot" required>
-
-  <label for="password">Password</label>
-  <input type="password" name="password" placeholder="findmeajob" required>
-
-  <% if (typeof errorMessage !== "undefined") { %>
-    <div class="error-message"><%= message %></div>
-  <% } %>
-
-  <button type="submit" class="btn btn-primary btn-block">Login</button>
-  </form>
-  <form action="/auth/facebook">
-    <button type="submit" class="btn btn-primary btn-block">Login With Facebook</button>
-  </form>
-  <form action="/auth/google">
-    <button type="submit" class="btn btn-primary btn-block">Login with Google+</button>
-  </form>
-
+        <form action="/auth/google">
+          <button type="submit" class="fa fa-google"></button>
+        </form> -->
+  </header>
+</section>
+<div class="wrap">
+    <div class="box one">
+        1</br>
+        Create an account.
+    </div>
+    <div class="box two">
+        2</br>Upload your Resume.
+    </div>
+    <div class="box three">
+        3</br>JoBot will fill out your profile or you can do it yourself if you want.
+    </div>
+    <div class="box four">
+        4</br>Based on your Resume we'll suggest keywords and find your dream job.
+    </div>
+    <div class="box five">
+        5</br> Click on Apply and done!
+    </div>
+</div>
