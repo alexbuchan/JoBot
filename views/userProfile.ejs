@@ -73,12 +73,13 @@
    <p>You have no Resume uploaded</p>
   </section>
 <% } else { %>
-<section>
+<section class="resume-container">
+  <h3>CV/Resume List:</h3>
   <ol>
     <% user.cvs.forEach(function(resume) { %>
       <div class="resume-list">
         <li>
-          Resume Name:<%= resume.resumeName %>
+          Resume Name:<%= resume.file_name %>
           <form action="/userProfile/<%= resume._id %>/delete" method="POST">
             <button class="resume-delete">DELETE</button>
           </form>
@@ -89,20 +90,23 @@
 </section>
 <% } %>
 
-<div class="form-group">
-  <p class="form-control">Occupation: <%= user.occupation %></p>
-  <p class="form-control">User Name: <%= user.username %></p>
-  <p class="form-control">First Name: <%= user.firstName %></p>
-  <p class="form-control">Last Name: <%= user.lastName %></p>
-  <p class="form-control">Age: <%= user.age %></p>
-  <p class="form-control">Email: <%= user.email %></p>
-  <p class="form-control">Phone: <%=user.phone %></p>
-  <p class="form-control">Street Number: <%= user.address.number%></p>
-  <p class="form-control">Street: <%= user.address.street %></p>
-  <p class="form-control">City: <%= user.address.city %></p>
-  <p class="form-control">Country: <%= user.address.Country %></p>
-  <p class="form-control">Zip: <%= user.address.zip %></p>
-</div>
+<section class="resume-container">
+  <h3>Profile Details:</h3>
+  <div class="form-group">
+      <p class="form-control">Occupation: <%= user.occupation %></p>
+      <p class="form-control">User Name: <%= user.username %></p>
+      <p class="form-control">First Name: <%= user.firstName %></p>
+      <p class="form-control">Last Name: <%= user.lastName %></p>
+      <p class="form-control">Age: <%= user.age %></p>
+      <p class="form-control">Email: <%= user.email %></p>
+      <p class="form-control">Phone: <%=user.phone %></p>
+      <p class="form-control">Street Number: <%= user.address.number%></p>
+      <p class="form-control">Street: <%= user.address.street %></p>
+      <p class="form-control">City: <%= user.address.city %></p>
+      <p class="form-control">Country: <%= user.address.Country %></p>
+      <p class="form-control">Zip: <%= user.address.zip %></p>
+  </div>
+</section>
 
 <%/* Trigger Edit Profile Modal with Button */%>
 <%/* Edit Profile Modal */%>
@@ -155,7 +159,7 @@
 
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary saveprofile" type="submit">Save</button>
+        <button class="btn btn-custom saveprofile" type="submit">Save</button>
       </form>
     </div>
 </div>

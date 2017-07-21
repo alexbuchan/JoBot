@@ -18,8 +18,8 @@
         <li>
           <p class="jobtitle">TITLE:<%= job.title %><p>
           <p class="jobcompany">COMPANY:<%= job.company %></p>
-          <p class="jobsalary"> SALARY: $<%= job.salary %></p>
-          <p class="jobdescription"> DESCRIPTION: $<%= job.description%></p>
+          <p class="jobsalary"> SALARY: <%= job.salary %></p>
+          <p class="jobdescription"> DESCRIPTION: <%= job.description%></p>
           <form action="/dashboard/<%= job._id %>/delete" method="POST">
             <button class="btn btn-custom deletejob">DELETE</button>
           </form>
