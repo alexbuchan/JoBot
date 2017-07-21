@@ -18,9 +18,11 @@ const ensureLogin = require("connect-ensure-login");
 const MongoStore = require("connect-mongo")(session);
 const FbStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const dotenv = require('dotenv').config();
 
 //CONNECT MONGODB
-mongoose.connect(`mongodb://localhost:${portDB}/${databaseName}`);
+// mongoose.connect(`mongodb://localhost:${portDB}/${databaseName}`);
+mongoose.connect(process.env.MONGODB_URI);
 
 //INIITIALIZE ROUTES
 
