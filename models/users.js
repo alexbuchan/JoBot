@@ -16,7 +16,7 @@ const userSchema = new Schema({
     number: String,
     city: String,
     Country: String,
-    zip: String
+    zip: String 
   },
   facebookID: String,
   googleID: String,

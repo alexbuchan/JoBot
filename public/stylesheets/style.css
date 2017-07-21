@@ -180,3 +180,8 @@ fieldset[disabled] .btn-custom.active {
 .box.two{
 	height: 40px;
 }
+
+a:hover {
+  color: #C74B44;
+  text-decoration: underline;
+}

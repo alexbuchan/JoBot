@@ -75,13 +75,15 @@ router.post('/userProfile', (req,res,next)=>{
     email: req.body.email,
     occupation: req.body.occupation,
     phone: req.body.phone,
-    street: req.body.street,
-    number: req.body.streetnumber,
-    city: req.body.city,
-    Country: req.body.country,
-    zip: req.body.zip
+    address:{
+      street: req.body.street,
+      number: req.body.streetnumber,
+      city: req.body.city,
+      Country: req.body.country,
+      zip: req.body.zip
+    }
   };
-
+console.log(updateProfile);
   User.findByIdAndUpdate(userID, updateProfile, (err,user)=>{
     if(err){return next(err);}
     res.redirect('/userProfile');
