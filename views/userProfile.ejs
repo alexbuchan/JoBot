@@ -89,11 +89,11 @@
   <p>Age: <%= user.age %></p>
   <p>Email: <%= user.email %></p>
   <p>Phone: <%=user.phone %></p>
-  <p>Street Number: <%= user.number%></p>
-  <p>Street: <%= user.street %></p>
-  <p>City: <%= user.city %></p>
-  <p>Country: <%= user.Country %></p>
-  <p>Zip: <%= user.zip %></p>
+  <p>Street Number: <%= user.address.number%></p>
+  <p>Street: <%= user.address.street %></p>
+  <p>City: <%= user.address.city %></p>
+  <p>Country: <%= user.address.Country %></p>
+  <p>Zip: <%= user.address.zip %></p>
 </div>
 
 <%/* Trigger Edit Profile Modal with Button */%>
@@ -133,16 +133,16 @@
 
       <h3>Address</h3>
       <label>Street Number</label>
-      <input type="text" class="form-control" name="streenumber" placeholder="Street Number" value="<%= user.number %>">
+      <input type="text" class="form-control" name="streetnumber" placeholder="Street Number" value="<%= user.address.number %>">
 
       <label>Street</label>
-      <input type="text" class="form-control" name="street" placeholder="Street" value="<%= user.street %>">
+      <input type="text" class="form-control" name="street" placeholder="Street" value="<%= user.address.street %>">
 
       <label>City</label>
-      <input type="text" class="form-control" name="city" placeholder="City" value="<%= user.city %>">
+      <input type="text" class="form-control" name="city" placeholder="City" value="<%= user.address.city %>">
 
       <label>Country</label>
-      <input type="text" class="form-control" name="country" placeholder="Country" value="<%= user.Country %>">
+      <input type="text" class="form-control" name="country" placeholder="Country" value="<%= user.address.Country %>">
 
       <label>Zip</label>
       <input type="text" class="form-control" name="zip" placeholder="Zip" value="<%= user.zip %>">
